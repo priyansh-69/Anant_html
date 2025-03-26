@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ananta Realty - Import Data</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .header {
+            background: #1d2d44;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px;
+        }
+        .import-section, .info-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 350px;
+        }
+        .info-section {
+            max-width: 350px;
+        }
+        .note {
+            background: #e9ecef;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .btn {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .btn-primary { background: #01ed09; color: white; }
+        .btn-secondary { background: #ff1111; color: white; }
+        .btn:hover { opacity: 0.85; }
+        .file-input {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        input[type="file"] {
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 8px;
+        }
+        ul {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+            .import-section, .info-section {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">ANANTA REALTY</div>
+    <div class="container">
+        <div class="import-section">
+            <h3>Browse/Import</h3>
+            <p class="note"><strong>Note:</strong> Download the sample file for reference and upload your data file for import.</p>
+            <p class="note"><strong>Note:</strong> If you want to use clean sample for importing, click the download button BELOW</p>
+            <button class="btn btn-primary">⬇ Download Sample File</button>
+            <div class="file-input">
+                <input type="file">
+            </div>
+            <div class="import-actions">
+                <button class="btn btn-primary">⏭ Next</button>
+                <button class="btn btn-secondary">✖ Cancel</button>
+            </div>
+        </div>
+        <div class="info-section">
+            <h4>Supported Formats</h4>
+            <ul>
+                <li>Use .CSV file format when importing records.</li>
+            </ul>
+            <h4>Maximum Limits</h4>
+            <ul>
+                <li>Maximum 10,000 records per batch.</li>
+            </ul>
+            <h4>Important Notes</h4>
+            <ul>
+                <li>Import a small set of sample records before importing all data.</li>
+                <li>Duplicate records will be updated using a unique value (mobile/email).</li>
+                <li>If "Assigned To" is missing, the system assigns the logged-in user.</li>
+                <li>Ensure system values match dropdown selections correctly.</li>
+                <li>Date format should be DD/MM/YYYY.</li>
+                <li>Date Time values should follow the DD/MM/YYYY hh:mm:ss format.</li>
+                <li>The checkbox value must be either "YES" or "NO".</li>
+                <li>The import option is accessible exclusively for Administrator and Manager profiles.</li>
+                <li>You can refer to the Import log to monitor the status of the import process.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

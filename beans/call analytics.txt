@@ -1,0 +1,131 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "call_analytics")
+public class CallAnalytics {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private Integer totalCalls;
+    private Integer connectedCalls;
+    private Integer notConnectedCalls;
+    private Integer uniqueContacts;
+    private Integer incomingCalls;
+    private Integer outgoingCalls;
+    private Integer missedCalls;
+    private Integer rejectedCalls;
+    private Double incomingDuration;
+    private Double outgoingDuration;
+
+    // Constructors
+    public CallAnalytics() {}
+
+    public CallAnalytics(Integer totalCalls, Integer connectedCalls, Integer notConnectedCalls,
+                         Integer uniqueContacts, Integer incomingCalls, Integer outgoingCalls,
+                         Integer missedCalls, Integer rejectedCalls, Double incomingDuration,
+                         Double outgoingDuration) {
+        this.totalCalls = totalCalls;
+        this.connectedCalls = connectedCalls;
+        this.notConnectedCalls = notConnectedCalls;
+        this.uniqueContacts = uniqueContacts;
+        this.incomingCalls = incomingCalls;
+        this.outgoingCalls = outgoingCalls;
+        this.missedCalls = missedCalls;
+        this.rejectedCalls = rejectedCalls;
+        this.incomingDuration = incomingDuration;
+        this.outgoingDuration = outgoingDuration;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getTotalCalls() {
+        return totalCalls;
+    }
+
+    public void setTotalCalls(Integer totalCalls) {
+        this.totalCalls = totalCalls;
+    }
+
+    public Integer getConnectedCalls() {
+        return connectedCalls;
+    }
+
+    public void setConnectedCalls(Integer connectedCalls) {
+        this.connectedCalls = connectedCalls;
+    }
+
+    public Integer getNotConnectedCalls() {
+        return notConnectedCalls;
+    }
+
+    public void setNotConnectedCalls(Integer notConnectedCalls) {
+        this.notConnectedCalls = notConnectedCalls;
+    }
+
+    public Integer getUniqueContacts() {
+        return uniqueContacts;
+    }
+
+    public void setUniqueContacts(Integer uniqueContacts) {
+        this.uniqueContacts = uniqueContacts;
+    }
+
+    public Integer getIncomingCalls() {
+        return incomingCalls;
+    }
+
+    public void setIncomingCalls(Integer incomingCalls) {
+        this.incomingCalls = incomingCalls;
+    }
+
+    public Integer getOutgoingCalls() {
+        return outgoingCalls;
+    }
+
+    public void setOutgoingCalls(Integer outgoingCalls) {
+        this.outgoingCalls = outgoingCalls;
+    }
+
+    public Integer getMissedCalls() {
+        return missedCalls;
+    }
+
+    public void setMissedCalls(Integer missedCalls) {
+        this.missedCalls = missedCalls;
+    }
+
+    public Integer getRejectedCalls() {
+        return rejectedCalls;
+    }
+
+    public void setRejectedCalls(Integer rejectedCalls) {
+        this.rejectedCalls = rejectedCalls;
+    }
+
+    public Double getIncomingDuration() {
+        return incomingDuration;
+    }
+
+    public void setIncomingDuration(Double incomingDuration) {
+        this.incomingDuration = incomingDuration;
+    }
+
+    public Double getOutgoingDuration() {
+        return outgoingDuration;
+    }
+
+    public void setOutgoingDuration(Double outgoingDuration) {
+        this.outgoingDuration = outgoingDuration;
+    }
+}

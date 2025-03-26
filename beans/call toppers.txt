@@ -1,0 +1,88 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "call_performance")
+public class CallPerformance {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String topDialer;
+    private Integer dialedCalls;
+    private String topAnswered;
+    private Integer receivedCalls;
+    private String topCaller;
+    private Integer totalCalls;
+    private String highestDurationUser;
+    private String highestDuration;
+    private String longestCallUser;
+    private String longestCallDuration;
+    private String longestCallTo;
+    private String longestCallTime;
+    private String avgIncomingDuration;
+    private Integer totalIncomingCalls;
+    private String avgOutgoingDuration;
+    private Integer totalOutgoingCalls;
+    private String avgCallDuration;
+    private Integer totalCallCount;
+    private String avgDailyDuration;
+    private Integer totalDays;
+
+    // Constructors
+    public CallPerformance() {}
+
+    public CallPerformance(String topDialer, Integer dialedCalls, String topAnswered, Integer receivedCalls,
+                           String topCaller, Integer totalCalls, String highestDurationUser, String highestDuration,
+                           String longestCallUser, String longestCallDuration, String longestCallTo, String longestCallTime,
+                           String avgIncomingDuration, Integer totalIncomingCalls, String avgOutgoingDuration, Integer totalOutgoingCalls,
+                           String avgCallDuration, Integer totalCallCount, String avgDailyDuration, Integer totalDays) {
+        this.topDialer = topDialer;
+        this.dialedCalls = dialedCalls;
+        this.topAnswered = topAnswered;
+        this.receivedCalls = receivedCalls;
+        this.topCaller = topCaller;
+        this.totalCalls = totalCalls;
+        this.highestDurationUser = highestDurationUser;
+        this.highestDuration = highestDuration;
+        this.longestCallUser = longestCallUser;
+        this.longestCallDuration = longestCallDuration;
+        this.longestCallTo = longestCallTo;
+        this.longestCallTime = longestCallTime;
+        this.avgIncomingDuration = avgIncomingDuration;
+        this.totalIncomingCalls = totalIncomingCalls;
+        this.avgOutgoingDuration = avgOutgoingDuration;
+        this.totalOutgoingCalls = totalOutgoingCalls;
+        this.avgCallDuration = avgCallDuration;
+        this.totalCallCount = totalCallCount;
+        this.avgDailyDuration = avgDailyDuration;
+        this.totalDays = totalDays;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTopDialer() {
+        return topDialer;
+    }
+
+    public void setTopDialer(String topDialer) {
+        this.topDialer = topDialer;
+    }
+
+    public Integer getDialedCalls() {
+        return dialedCalls;
+    }
+
+    public void setDialedCalls(Integer dialedCalls) {
+        this.dialedCalls = dialedCalls;
+    }
+}

@@ -1,0 +1,114 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "lead_summary")
+public class LeadSummary {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String leadOwner;
+    private Integer newLeadId;
+    private Double newExpectedRevenue;
+    private Integer contactedLeadId;
+    private Double contactedExpectedRevenue;
+    private Integer interestedLeadId;
+    private Double interestedExpectedRevenue;
+    private Integer followUpLeadId;
+    private Double followUpExpectedRevenue;
+    private Integer dealClosedLeadId;
+    private Double dealClosedExpectedRevenue;
+    private Integer cancelLeadId;
+    private Double cancelExpectedRevenue;
+    private Integer notInterestedLeadId;
+    private Double notInterestedExpectedRevenue;
+    private Integer siteVisitLeadId;
+    private Double siteVisitExpectedRevenue;
+    private Integer totalLeadId;
+    private Double totalExpectedRevenue;
+
+    // Constructors
+    public LeadSummary() {}
+
+    public LeadSummary(String leadOwner, Integer newLeadId, Double newExpectedRevenue,
+                       Integer contactedLeadId, Double contactedExpectedRevenue,
+                       Integer interestedLeadId, Double interestedExpectedRevenue,
+                       Integer followUpLeadId, Double followUpExpectedRevenue,
+                       Integer dealClosedLeadId, Double dealClosedExpectedRevenue,
+                       Integer cancelLeadId, Double cancelExpectedRevenue,
+                       Integer notInterestedLeadId, Double notInterestedExpectedRevenue,
+                       Integer siteVisitLeadId, Double siteVisitExpectedRevenue,
+                       Integer totalLeadId, Double totalExpectedRevenue) {
+        this.leadOwner = leadOwner;
+        this.newLeadId = newLeadId;
+        this.newExpectedRevenue = newExpectedRevenue;
+        this.contactedLeadId = contactedLeadId;
+        this.contactedExpectedRevenue = contactedExpectedRevenue;
+        this.interestedLeadId = interestedLeadId;
+        this.interestedExpectedRevenue = interestedExpectedRevenue;
+        this.followUpLeadId = followUpLeadId;
+        this.followUpExpectedRevenue = followUpExpectedRevenue;
+        this.dealClosedLeadId = dealClosedLeadId;
+        this.dealClosedExpectedRevenue = dealClosedExpectedRevenue;
+        this.cancelLeadId = cancelLeadId;
+        this.cancelExpectedRevenue = cancelExpectedRevenue;
+        this.notInterestedLeadId = notInterestedLeadId;
+        this.notInterestedExpectedRevenue = notInterestedExpectedRevenue;
+        this.siteVisitLeadId = siteVisitLeadId;
+        this.siteVisitExpectedRevenue = siteVisitExpectedRevenue;
+        this.totalLeadId = totalLeadId;
+        this.totalExpectedRevenue = totalExpectedRevenue;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLeadOwner() {
+        return leadOwner;
+    }
+
+    public void setLeadOwner(String leadOwner) {
+        this.leadOwner = leadOwner;
+    }
+
+    public Integer getNewLeadId() {
+        return newLeadId;
+    }
+
+    public void setNewLeadId(Integer newLeadId) {
+        this.newLeadId = newLeadId;
+    }
+
+    public Double getNewExpectedRevenue() {
+        return newExpectedRevenue;
+    }
+
+    public void setNewExpectedRevenue(Double newExpectedRevenue) {
+        this.newExpectedRevenue = newExpectedRevenue;
+    }
+    
+    public Integer getTotalLeadId() {
+        return totalLeadId;
+    }
+    
+    public void setTotalLeadId(Integer totalLeadId) {
+        this.totalLeadId = totalLeadId;
+    }
+    
+    public Double getTotalExpectedRevenue() {
+        return totalExpectedRevenue;
+    }
+    
+    public void setTotalExpectedRevenue(Double totalExpectedRevenue) {
+        this.totalExpectedRevenue = totalExpectedRevenue;
+    }
+}

@@ -1,0 +1,99 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "user_information")
+public class UserInfo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String name;
+    private String email;
+    private String mobile;
+    private String profile;
+    private String reportingTo;
+    private String userStatus;
+    private String loginAllowed;
+
+    // Constructors
+    public UserInfo() {}
+
+    public UserInfo(String name, String email, String mobile, String profile, String reportingTo,
+                    String userStatus, String loginAllowed) {
+        this.name = name;
+        this.email = email;
+        this.mobile = mobile;
+        this.profile = profile;
+        this.reportingTo = reportingTo;
+        this.userStatus = userStatus;
+        this.loginAllowed = loginAllowed;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
+    public String getReportingTo() {
+        return reportingTo;
+    }
+
+    public void setReportingTo(String reportingTo) {
+        this.reportingTo = reportingTo;
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public String getLoginAllowed() {
+        return loginAllowed;
+    }
+
+    public void setLoginAllowed(String loginAllowed) {
+        this.loginAllowed = loginAllowed;
+    }
+}

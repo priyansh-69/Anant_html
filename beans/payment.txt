@@ -1,0 +1,51 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "payments")
+public class Payment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String paymentId;
+    private Double amount;
+    private String type;
+    private String frequency;
+    private String paymentStatus;
+    private String invoice;
+    private String paymentDate;
+
+    // Constructors
+    public Payment() {}
+
+    public Payment(String paymentId, Double amount, String type, String frequency,
+                   String paymentStatus, String invoice, String paymentDate) {
+        this.paymentId = paymentId;
+        this.amount = amount;
+        this.type = type;
+        this.frequency = frequency;
+        this.paymentStatus = paymentStatus;
+        this.invoice = invoice;
+        this.paymentDate = paymentDate;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
+}

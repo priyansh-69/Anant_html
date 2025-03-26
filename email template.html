@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ananta Realty-Templates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .topbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #28a745;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            font-size: 1.2rem;
+        }
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            background: white;
+            padding: 20px;
+            margin-top: 80px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .tabs div {
+            cursor: pointer;
+            padding: 10px;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
+        }
+        .tabs .active {
+            border-bottom: 2px solid green;
+        }
+        .search-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-bar input, .search-bar select, .search-bar button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .search-bar button {
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .no-data {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .no-data img {
+            width: 100px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">Templates</div>
+    <div class="container">
+        <div class="tabs">
+            <div class="active" onclick="loadTemplate('email')">Email Templates</div>
+            <div class="active" onclick="loadTemplate('sms')">SMS Templates</div>
+        </div>
+        
+        <!-- Content Containers -->
+        <div id="emailTemplates">
+            <div class="container">
+                <h2>Email Templates</h2>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search by Name">
+                    <select>
+                        <option>All</option>
+                    </select>
+                    <button>+ New Email Template</button>
+                </div>
+                <div class="no-data">
+                    <img src="no_data_icon.png" alt="No Data">
+                    <h3>No email templates found</h3>
+                    <p>You don’t have any records to view.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="smsTemplates" style="display: none;">
+            <div class="container">
+                <h2>SMS Templates</h2>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search by Name">
+                    <select>
+                        <option>All</option>
+                    </select>
+                    <button>+ New SMS Template</button>
+                </div>
+                <div class="no-data">
+                    <img src="no_data_icon.png" alt="No Data">
+                    <h3>No SMS templates found</h3>
+                    <p>You don’t have any records to view.</p>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            function loadTemplate(type) {
+                if (type === 'email') {
+                    document.getElementById('emailTemplates').style.display = 'block';
+                    document.getElementById('smsTemplates').style.display = 'none';
+                } else {
+                    document.getElementById('emailTemplates').style.display = 'none';
+                    document.getElementById('smsTemplates').style.display = 'block';
+                }
+            }
+        </script>
+        

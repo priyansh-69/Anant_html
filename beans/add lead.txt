@@ -1,0 +1,213 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "lead_info")
+public class LeadInfo {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String contactName;
+    private String alternateNumber;
+    private String mobileNumber;
+    private String emailAddress;
+    private Double expectedRevenue;
+    private LocalDateTime expectedClosingDate;
+    private String leadOwner;
+    private String category;
+    private String leadStage;
+    private LocalDateTime nextFollowUpOn;
+    private String nextFollowUpNotes;
+    private String description;
+    private String leadSource;
+    private String campaignName;
+    private String campaignTerm;
+    private String campaignContent;
+    private String createdBy;
+    private LocalDateTime leadDate;
+
+    // Constructors
+    public LeadInfo() {}
+
+    public LeadInfo(String contactName, String alternateNumber, String mobileNumber, String emailAddress,
+                    Double expectedRevenue, LocalDateTime expectedClosingDate, String leadOwner, String category,
+                    String leadStage, LocalDateTime nextFollowUpOn, String nextFollowUpNotes, String description,
+                    String leadSource, String campaignName, String campaignTerm, String campaignContent,
+                    String createdBy, LocalDateTime leadDate) {
+        this.contactName = contactName;
+        this.alternateNumber = alternateNumber;
+        this.mobileNumber = mobileNumber;
+        this.emailAddress = emailAddress;
+        this.expectedRevenue = expectedRevenue;
+        this.expectedClosingDate = expectedClosingDate;
+        this.leadOwner = leadOwner;
+        this.category = category;
+        this.leadStage = leadStage;
+        this.nextFollowUpOn = nextFollowUpOn;
+        this.nextFollowUpNotes = nextFollowUpNotes;
+        this.description = description;
+        this.leadSource = leadSource;
+        this.campaignName = campaignName;
+        this.campaignTerm = campaignTerm;
+        this.campaignContent = campaignContent;
+        this.createdBy = createdBy;
+        this.leadDate = leadDate;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getAlternateNumber() {
+        return alternateNumber;
+    }
+
+    public void setAlternateNumber(String alternateNumber) {
+        this.alternateNumber = alternateNumber;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public Double getExpectedRevenue() {
+        return expectedRevenue;
+    }
+
+    public void setExpectedRevenue(Double expectedRevenue) {
+        this.expectedRevenue = expectedRevenue;
+    }
+
+    public LocalDateTime getExpectedClosingDate() {
+        return expectedClosingDate;
+    }
+
+    public void setExpectedClosingDate(LocalDateTime expectedClosingDate) {
+        this.expectedClosingDate = expectedClosingDate;
+    }
+
+    public String getLeadOwner() {
+        return leadOwner;
+    }
+
+    public void setLeadOwner(String leadOwner) {
+        this.leadOwner = leadOwner;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getLeadStage() {
+        return leadStage;
+    }
+
+    public void setLeadStage(String leadStage) {
+        this.leadStage = leadStage;
+    }
+
+    public LocalDateTime getNextFollowUpOn() {
+        return nextFollowUpOn;
+    }
+
+    public void setNextFollowUpOn(LocalDateTime nextFollowUpOn) {
+        this.nextFollowUpOn = nextFollowUpOn;
+    }
+
+    public String getNextFollowUpNotes() {
+        return nextFollowUpNotes;
+    }
+
+    public void setNextFollowUpNotes(String nextFollowUpNotes) {
+        this.nextFollowUpNotes = nextFollowUpNotes;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLeadSource() {
+        return leadSource;
+    }
+
+    public void setLeadSource(String leadSource) {
+        this.leadSource = leadSource;
+    }
+
+    public String getCampaignName() {
+        return campaignName;
+    }
+
+    public void setCampaignName(String campaignName) {
+        this.campaignName = campaignName;
+    }
+
+    public String getCampaignTerm() {
+        return campaignTerm;
+    }
+
+    public void setCampaignTerm(String campaignTerm) {
+        this.campaignTerm = campaignTerm;
+    }
+
+    public String getCampaignContent() {
+        return campaignContent;
+    }
+
+    public void setCampaignContent(String campaignContent) {
+        this.campaignContent = campaignContent;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getLeadDate() {
+        return leadDate;
+    }
+
+    public void setLeadDate(LocalDateTime leadDate) {
+        this.leadDate = leadDate;
+    }
+}

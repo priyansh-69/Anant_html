@@ -1,0 +1,65 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "active_leads")
+public class ActiveLeads {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String leadOwner;
+    private Double newLeads;
+    private Double contactedLeads;
+    private Double hotLeads;
+    private Double followUpLeads;
+    private Double totalLeads;
+
+    // Constructors
+    public ActiveLeads() {}
+
+    public ActiveLeads(String leadOwner, Double newLeads, Double contactedLeads,
+                       Double hotLeads, Double followUpLeads, Double totalLeads) {
+        this.leadOwner = leadOwner;
+        this.newLeads = newLeads;
+        this.contactedLeads = contactedLeads;
+        this.hotLeads = hotLeads;
+        this.followUpLeads = followUpLeads;
+        this.totalLeads = totalLeads;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLeadOwner() {
+        return leadOwner;
+    }
+
+    public void setLeadOwner(String leadOwner) {
+        this.leadOwner = leadOwner;
+    }
+
+    public Double getNewLeads() {
+        return newLeads;
+    }
+
+    public void setNewLeads(Double newLeads) {
+        this.newLeads = newLeads;
+    }
+
+    public Double getTotalLeads() {
+        return totalLeads;
+    }
+
+    public void setTotalLeads(Double totalLeads) {
+        this.totalLeads = totalLeads;
+    }
+}

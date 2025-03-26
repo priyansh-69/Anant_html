@@ -1,0 +1,110 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "tasks")
+public class Task {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String description;
+    private String status;
+    private LocalDateTime date;
+    private String assignedUser;
+    private String customerName;
+    private String customerContact;
+    private String leadReference;
+    private String createdBy;
+
+    // Constructors
+    public Task() {}
+
+    public Task(String description, String status, LocalDateTime date, String assignedUser,
+                String customerName, String customerContact, String leadReference, String createdBy) {
+        this.description = description;
+        this.status = status;
+        this.date = date;
+        this.assignedUser = assignedUser;
+        this.customerName = customerName;
+        this.customerContact = customerContact;
+        this.leadReference = leadReference;
+        this.createdBy = createdBy;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public String getAssignedUser() {
+        return assignedUser;
+    }
+
+    public void setAssignedUser(String assignedUser) {
+        this.assignedUser = assignedUser;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getCustomerContact() {
+        return customerContact;
+    }
+
+    public void setCustomerContact(String customerContact) {
+        this.customerContact = customerContact;
+    }
+
+    public String getLeadReference() {
+        return leadReference;
+    }
+
+    public void setLeadReference(String leadReference) {
+        this.leadReference = leadReference;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+}

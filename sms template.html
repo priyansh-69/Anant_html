@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ananta Realty - SMS Templates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .tabs div {
+            cursor: pointer;
+            padding: 10px;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
+        }
+        .tabs .active {
+            border-bottom: 2px solid green;
+        }
+        .search-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-bar input, .search-bar select, .search-bar button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .search-bar button {
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .no-data {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .no-data img {
+            width: 100px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align:center;">Templates</h2>
+        <div class="tabs">
+            <div class="active">SMS Templates</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search by Name">
+            <select>
+                <option>All</option>
+            </select>
+            <button>+ New Template</button>
+        </div>
+        <div class="no-data">
+            <img src="no_data_icon.png" alt="No Data">
+            <h3>No data found</h3>
+            <p>You don’t have any records to view.</p>
+        </div>
+    </div>
+</body>
+</html>

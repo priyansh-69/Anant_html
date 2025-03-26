@@ -1,0 +1,81 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "organization")
+public class Organization {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String companyName;
+    private String applicationTitle;
+    private String website;
+    private String phone;
+    private String panNo;
+    private String gstIn;
+    
+    private String billingContactName;
+    private String billingContactEmail;
+    private String billingDesignation;
+    private String billingMobile;
+    
+    private String street1;
+    private String street2;
+    private String city;
+    private String state;
+    private String pinCode;
+    private String country;
+    
+    private String createdTime;
+    private String modifiedTime;
+    private String lastViewedTime;
+
+    // Constructors
+    public Organization() {}
+
+    public Organization(String companyName, String applicationTitle, String website, String phone,
+                        String panNo, String gstIn, String billingContactName, String billingContactEmail,
+                        String billingDesignation, String billingMobile, String street1, String street2,
+                        String city, String state, String pinCode, String country, String createdTime,
+                        String modifiedTime, String lastViewedTime) {
+        this.companyName = companyName;
+        this.applicationTitle = applicationTitle;
+        this.website = website;
+        this.phone = phone;
+        this.panNo = panNo;
+        this.gstIn = gstIn;
+        this.billingContactName = billingContactName;
+        this.billingContactEmail = billingContactEmail;
+        this.billingDesignation = billingDesignation;
+        this.billingMobile = billingMobile;
+        this.street1 = street1;
+        this.street2 = street2;
+        this.city = city;
+        this.state = state;
+        this.pinCode = pinCode;
+        this.country = country;
+        this.createdTime = createdTime;
+        this.modifiedTime = modifiedTime;
+        this.lastViewedTime = lastViewedTime;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+}

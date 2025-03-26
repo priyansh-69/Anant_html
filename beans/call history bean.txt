@@ -1,0 +1,111 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "call_history")
+public class CallHistory {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String callerName;
+    private LocalDateTime startTime;
+    private String contactName;
+    private String contactPhoneNo;
+    private String callType;
+    private String callDuration;
+    private String feedback;
+    private String notes;
+
+    // Constructors
+    public CallHistory() {}
+
+    public CallHistory(String callerName, LocalDateTime startTime, String contactName, 
+                       String contactPhoneNo, String callType, String callDuration, 
+                       String feedback, String notes) {
+        this.callerName = callerName;
+        this.startTime = startTime;
+        this.contactName = contactName;
+        this.contactPhoneNo = contactPhoneNo;
+        this.callType = callType;
+        this.callDuration = callDuration;
+        this.feedback = feedback;
+        this.notes = notes;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCallerName() {
+        return callerName;
+    }
+
+    public void setCallerName(String callerName) {
+        this.callerName = callerName;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getContactPhoneNo() {
+        return contactPhoneNo;
+    }
+
+    public void setContactPhoneNo(String contactPhoneNo) {
+        this.contactPhoneNo = contactPhoneNo;
+    }
+
+    public String getCallType() {
+        return callType;
+    }
+
+    public void setCallType(String callType) {
+        this.callType = callType;
+    }
+
+    public String getCallDuration() {
+        return callDuration;
+    }
+
+    public void setCallDuration(String callDuration) {
+        this.callDuration = callDuration;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+}

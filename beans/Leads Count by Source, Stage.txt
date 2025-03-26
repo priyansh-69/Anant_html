@@ -1,0 +1,75 @@
+package com.anantarealty.crm.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "lead_source_summary")
+public class LeadSourceSummary {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String leadSource;
+    private Integer newLeads;
+    private Integer contactedLeads;
+    private Integer interestedLeads;
+    private Integer followUpLeads;
+    private Integer dealClosedLeads;
+    private Integer cancelDealLeads;
+    private Integer notInterestedLeads;
+    private Integer siteVisitLeads;
+    private Integer totalLeads;
+
+    // Constructors
+    public LeadSourceSummary() {}
+
+    public LeadSourceSummary(String leadSource, Integer newLeads, Integer contactedLeads,
+                             Integer interestedLeads, Integer followUpLeads, Integer dealClosedLeads,
+                             Integer cancelDealLeads, Integer notInterestedLeads, Integer siteVisitLeads,
+                             Integer totalLeads) {
+        this.leadSource = leadSource;
+        this.newLeads = newLeads;
+        this.contactedLeads = contactedLeads;
+        this.interestedLeads = interestedLeads;
+        this.followUpLeads = followUpLeads;
+        this.dealClosedLeads = dealClosedLeads;
+        this.cancelDealLeads = cancelDealLeads;
+        this.notInterestedLeads = notInterestedLeads;
+        this.siteVisitLeads = siteVisitLeads;
+        this.totalLeads = totalLeads;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLeadSource() {
+        return leadSource;
+    }
+
+    public void setLeadSource(String leadSource) {
+        this.leadSource = leadSource;
+    }
+
+    public Integer getNewLeads() {
+        return newLeads;
+    }
+
+    public void setNewLeads(Integer newLeads) {
+        this.newLeads = newLeads;
+    }
+
+    public Integer getTotalLeads() {
+        return totalLeads;
+    }
+
+    public void setTotalLeads(Integer totalLeads) {
+        this.totalLeads = totalLeads;
+    }
+}

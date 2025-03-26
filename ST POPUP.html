@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site visit Form</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .task-form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid #28a745;
+            width: 350px;
+        }
+        .task-form label {
+            font-weight: bold;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .task-form textarea,
+        .task-form input,
+        .task-form select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .assigned-container {
+            display: flex;
+            align-items: center;
+        }
+        .assigned-container input {
+            flex: 1;
+        }
+        .assigned-icon {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 8px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+        .due-container {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-save { background: #28a745; color: white; }
+        .btn-clear { background: #fb5555; color: white; }
+        .btn:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+    <div class="task-form">
+        <label for="Site visit">*Site Visit</label>
+        <textarea id="Site Visit" rows="4"></textarea>
+        
+        <label for="assigned">Assigned To</label>
+        <div class="assigned-container">
+            <input type="text" id="assigned" value="Subramanyam" readonly>
+            <button class="assigned-icon">👤</button>
+        </div>
+        
+        <label>Due On</label>
+        <div class="due-container">
+            <input type="text" value="22-Feb-2025" readonly>
+            <input type="text" value="04:23 PM" readonly>
+        </div>
+        
+        <label for="related">Related To</label>
+        <input type="text" id="related" value="None" readonly>
+        
+        <div class="btn-group">
+            <button class="btn btn-save">Save</button>
+            <button class="btn btn-clear">Clear</button>
+        </div>
+    </div>
+</body>
+</html>
