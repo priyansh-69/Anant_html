@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sender Email Address</title>
+  <!-- Reference your existing CSS -->
+  <link rel="stylesheet" href="Common.css" />
+  <link rel="stylesheet" href="Field-Customisation.css" />
+  <link rel="stylesheet" href="sender-email.css" />
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="main-nav">
+    <a href="Field-customisation.html">Field Customization</a>
+    <a href="mobile-settings.html">User Mobile Settings</a>
+    <a href="distribution-rules.html">Distribution Rules</a>
+    <a href="sender-email.html" class="active">Sender Email Address</a>
+    <a href="import-log.html">Import Log</a>
+    <a href="audit-log.html">Audit Log</a>
+  </nav>
+
+  <!-- Main Content Container -->
+  <div class="content-container">
+    <!-- Header + New Sender Email Button -->
+    <div class="header-container">
+      <button class="new-sender-btn" id="newSenderBtn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        New Sender Email
+      </button>
+    </div>
+
+    <!-- Table with Column Headers -->
+    <table class="sender-table">
+      <thead>
+        <tr>
+          <th>FROM NAME</th>
+          <th>FROM ADDRESS</th>
+          <th>STATUS</th>
+          <th>RESEND</th>
+          <th>DELETE</th>
+        </tr>
+      </thead>
+      <tbody id="senderTableBody">
+      </tbody>
+    </table>
+
+    <!-- No Data Found Section -->
+    <div class="no-data-container" id="noDataMessage">
+      <img src="no-data-icon.png" alt="No data" class="no-data-icon" />
+      <h2 class="no-data-title">No data found</h2>
+      <p class="no-data-message">You don't have any records to view.</p>
+    </div>
+  </div>
+
+  <!-- New Sender Email Modal -->
+  <div class="modal" id="senderModal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModalBtn">&times;</span>
+      <h2>Add New Sender Email</h2>
+      <form id="senderForm">
+        <div class="form-group">
+          <label for="fromName">From Name</label>
+          <input type="text" id="fromName" required placeholder="Enter sender name">
+        </div>
+        <div class="form-group">
+          <label for="fromAddress">From Address</label>
+          <input type="email" id="fromAddress" required placeholder="Enter email address">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="save-btn">Save</button>
+          <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="sender-email.js"></script>
+</body>
+</html>
