@@ -1,0 +1,164 @@
+.edit-btn {
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.order-up,
+.order-down {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    color: #374151;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 2px;
+    transition: all 0.2s ease;
+}
+
+.order-up:hover,
+.order-down:hover {
+    background-color: #f3f4f6;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.order-up:active,
+.order-down:active {
+    transform: translateY(0);
+}
+
+.edit-btn:hover {
+    background-color: #16a34a;
+    transform: translateY(-1px);
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+    transform: translateY(-1px);
+}
+
+.edit-btn:active,
+.delete-btn:active {
+    transform: translateY(0);
+}
+
+.rules-table tr {
+    transition: background-color 0.2s ease;
+}
+
+.rules-table tr:hover {
+    background-color: #f8fafc;
+}
+
+.condition-row {
+    position: relative;
+    padding-right: 100px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.more-btn,
+.fewer-btn {
+    position: absolute;
+    right: 0;
+    padding: 6px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    background: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 1;
+}
+
+.more-btn {
+    color: #2563eb;
+    border-color: #2563eb;
+}
+
+.fewer-btn {
+    color: #4b5563;
+}
+
+.more-btn:hover,
+.fewer-btn:hover {
+    background: #f8fafc;
+    transform: translateY(-1px);
+}
+
+.more-btn:active,
+.fewer-btn:active {
+    transform: translateY(0);
+}
+
+/* Error state styles */
+.field-select.error,
+.operator-select.error,
+.value-input.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 1px #ef4444;
+}
+
+.error-message {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Loading state */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Success feedback */
+.success-flash {
+    animation: successFlash 1s ease;
+}
+
+@keyframes successFlash {
+    0% { background-color: #dcfce7; }
+    100% { background-color: transparent; }
+}
+
+/* Rule text styles */
+.rules-table .is {
+    color: #49d409;  /* Gray color for "is" */
+    margin: 0 4px;
+}
+
+.rules-table .or {
+    color: #dc2626;  /* Red color for "OR" */
+    margin: 0 4px;
+    font-weight: 500;
+}
+
+.rules-table .and {
+    color: #2563eb;  /* Blue color for "AND" */
+    margin: 0 4px;
+    font-weight: 500;
+}

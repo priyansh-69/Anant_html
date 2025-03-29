@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Field Customization</title>
+    <link rel="stylesheet" href="Common.css" />
+    <link rel="stylesheet" href="Field-Customisation.css" />
+    <link rel="stylesheet" href="Field-customisation.css" />
+</head>
+<body>
+    <nav class="main-nav">
+        <a href="#" class="active">Field Customization</a>
+      <a href="mobile-settings.html">User Mobile Settings</a>
+      <a href="distribution-rules.html">Distribution Rules</a>
+      <a href="sender-email.html">Sender Email Address</a>
+      <a href="import-log.html">Import Log</a>
+      <a href="audit-log.html">Audit Log</a>
+    </nav>
+
+    <div class="form-controls">
+      <span class="form-label">Choose a form</span>
+      <button class="form-button">Leads</button>
+      <button class="add-field">Add Field</button>
+      <button class="save-changes">Save Changes</button>
+    </div>
+    
+    <div class="leads-layout">
+      <div class="section-header">
+        <h2>Leads Page Layout</h2>
+        <div class="header-controls">
+          <button class="folder-plus" title="Add Group"></button>
+          <button class="move-up" title="Move Up"></button>
+          <button class="move-down" title="Move Down"></button>
+        </div>
+      </div>
+
+      <!-- Add Modal HTML -->
+      <div class="modal" id="editGroupModal">
+        <div class="modal-content">
+          <h2>Edit Group</h2>
+          
+          <div class="form-group">
+            <label for="groupName">Name</label>
+            <input type="text" id="groupName" value="Lead Info" class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="columnLayout">Column Layout</label>
+            <div class="dropdown">
+              <button class="dropdown-toggle">Two Column</button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item">One Column</div>
+                <div class="dropdown-item selected">Two Column</div>
+                <div class="dropdown-item">Three Column</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-ok">Ok</button>
+            <button class="btn-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Group Modal -->
+      <div class="modal" id="createGroupModal">
+        <div class="modal-content">
+          <h2>Create Group</h2>
+          
+          <div class="form-group">
+            <label for="newGroupName">Name</label>
+            <input type="text" id="newGroupName" value="New Group" class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="newColumnLayout">Column Layout</label>
+            <div class="dropdown">
+              <button class="dropdown-toggle">Two Column</button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item">One Column</div>
+                <div class="dropdown-item selected">Two Column</div>
+                <div class="dropdown-item">Three Column</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-ok">Ok</button>
+            <button class="btn-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Field Modal -->
+      <div class="modal" id="createFieldModal">
+        <div class="modal-content">
+          <h2>Create Field</h2>
+          
+          <div class="form-group">
+            <label for="fieldGroup">Group</label>
+            <div class="dropdown group-dropdown">
+              <button type="button" class="dropdown-toggle" id="fieldGroup">Lead Title</button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item selected">Lead Title</div>
+                <div class="dropdown-item">Lead Info</div>
+                <div class="dropdown-item">Won Info</div>
+                <div class="dropdown-item">Lost Info</div>
+                <div class="dropdown-item">Next Follow-up Info</div>
+                <div class="dropdown-item">Description</div>
+                <div class="dropdown-item">Source Info</div>
+                <div class="dropdown-item">Last Call Info</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fieldName">Field Name</label>
+            <input type="text" id="fieldName" class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="fieldType">Field Type</label>
+            <div class="dropdown field-type-dropdown">
+              <button type="button" class="dropdown-toggle" id="fieldType">Text</button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item selected">Text</div>
+                <div class="dropdown-item">Number</div>
+                <div class="dropdown-item">Decimal</div>
+                <div class="dropdown-item">Email ID</div>
+                <div class="dropdown-item">Mobile Number</div>
+                <div class="dropdown-item">CheckBox</div>
+                <div class="dropdown-item">Dropdown</div>
+                <div class="dropdown-item">Date</div>
+                <div class="dropdown-item">Time</div>
+                <div class="dropdown-item">Date & Time</div>
+                <div class="dropdown-item">Currency</div>
+                <div class="dropdown-item">Text Area</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="isMandatory">
+              <span>Is Mandatory</span>
+            </label>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="needMassEdit" checked>
+              <span>Need for Mass Edit</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="searchMode">Search Mode</label>
+            <div class="dropdown search-mode-dropdown">
+              <button type="button" class="dropdown-toggle" id="searchMode">ALL</button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item">Advanced</div>
+                <div class="dropdown-item">Basic</div>
+                <div class="dropdown-item selected">ALL</div>
+                <div class="dropdown-item">NO</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="needFieldMapping" checked>
+              <span>Need for Field Mapping</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="columnWidth">Column Width</label>
+            <input type="text" id="columnWidth" value="150" class="form-input">
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-save">Save Changes</button>
+            <button class="btn-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Field Modal -->
+      <div class="modal" id="editFieldModal">
+        <div class="modal-content">
+          <h2>Edit Field</h2>
+          
+          <div class="form-group">
+            <label for="editGroup">Group</label>
+            <div class="dropdown group-dropdown">
+              <button type="button" class="dropdown-toggle" id="editGroup">Lead Title</button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item">Lead Title</div>
+                <div class="dropdown-item">Lead Info</div>
+                <div class="dropdown-item">Won Info</div>
+                <div class="dropdown-item">Lost Info</div>
+                <div class="dropdown-item">Next Follow-up Info</div>
+                <div class="dropdown-item">Description</div>
+                <div class="dropdown-item">Source Info</div>
+                <div class="dropdown-item">Last Call Info</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="editFieldName">Field Name</label>
+            <input type="text" id="editFieldName" class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="editFieldType">Field Type</label>
+            <div class="dropdown field-type-dropdown">
+              <button type="button" class="dropdown-toggle" id="editFieldType">Text</button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item selected">Text</div>
+                <div class="dropdown-item">Number</div>
+                <div class="dropdown-item">Decimal</div>
+                <div class="dropdown-item">Email ID</div>
+                <div class="dropdown-item">Mobile Number</div>
+                <div class="dropdown-item">CheckBox</div>
+                <div class="dropdown-item">Dropdown</div>
+                <div class="dropdown-item">Date</div>
+                <div class="dropdown-item">Time</div>
+                <div class="dropdown-item">Date & Time</div>
+                <div class="dropdown-item">Currency</div>
+                <div class="dropdown-item">Text Area</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="editIsMandatory">
+              <span>Is Mandatory</span>
+            </label>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="editNeedMassEdit">
+              <span>Need for Mass Edit</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="editSearchMode">Search Mode</label>
+            <div class="dropdown search-mode-dropdown">
+              <button type="button" class="dropdown-toggle" id="editSearchMode">ALL</button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item">Advanced</div>
+                <div class="dropdown-item">Basic</div>
+                <div class="dropdown-item selected">ALL</div>
+                <div class="dropdown-item">NO</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="editNeedFieldMapping" checked>
+              <span>Need for Field Mapping</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="editColumnWidth">Column Width</label>
+            <input type="text" id="editColumnWidth" class="form-input" value="150">
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-save">Save Changes</button>
+            <button class="btn-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="leadTitleCheck" />
+          </div>
+          <div class="field-name">Lead Title</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="leadInfoCheck" />
+          </div>
+          <div class="field-name">Lead Info</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+                <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="contactNameCheck" />
+            </div>
+            <div class="field-name">Contact Name</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="mobileNumberCheck" />
+            </div>
+            <div class="field-name">Mobile Number</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="alternateNumberCheck" />
+            </div>
+            <div class="field-name">Alternate Number</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="emailAddressCheck" />
+            </div>
+            <div class="field-name">Email Address</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="expectedRevenueCheck" />
+            </div>
+            <div class="field-name">Expected Revenue</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="expectedClosingDateCheck" />
+            </div>
+            <div class="field-name">Expected Closing Date</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="leadOwnerCheck" />
+            </div>
+            <div class="field-name">Lead Owner</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+            </div>
+            
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="leadStageCheck" />
+            </div>
+            <div class="field-name">Lead Stage</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+            </div>
+            </div>
+            
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="categoryCheck" />
+            </div>
+            <div class="field-name">category</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="assignedManagerCheck" />
+            </div>
+            <div class="field-name">Assigned Manager</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Won Info Section -->
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="wonInfoCheck" />
+          </div>
+          <div class="field-name">Won Info</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="dealDateCheck" />
+            </div>
+            <div class="field-name">Deal Date</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="dealPriceCheck" />
+            </div>
+            <div class="field-name">Deal Price</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="dealNoOfCentsCheck" />
+            </div>
+            <div class="field-name">Deal No Of Cents</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="dealTotalValueCheck" />
+            </div>
+            <div class="field-name">Deal Total Value</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="dealDescriptionCheck" />
+            </div>
+            <div class="field-name">Deal Description</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lost Info Section -->
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="lostInfoCheck" />
+          </div>
+          <div class="field-name">Lost Info</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="lostDateCheck" />
+            </div>
+            <div class="field-name">Lost Date</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="lostReasonCheck" />
+            </div>
+            <div class="field-name">Lost Reason</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="lostDescriptionCheck" />
+            </div>
+            <div class="field-name">Lost Description</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Follow-up Info Section -->
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="nextFollowUpInfoCheck" />
+          </div>
+          <div class="field-name">Next Follow-up Info</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="nextFollowUpOnCheck" />
+            </div>
+            <div class="field-name">Next Follow-up On</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="nextFollowUpNotesCheck" />
+            </div>
+            <div class="field-name">Next Follow-up Notes</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description Section -->
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="descriptionCheck" />
+          </div>
+          <div class="field-name">Description</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="updateDescriptionCheck" />
+            </div>
+            <div class="field-name">Update few words about this lead</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Source Info Section -->
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="sourceInfoCheck" />
+          </div>
+          <div class="field-name">Source Info</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="leadSourceCheck" />
+            </div>
+            <div class="field-name">Lead Source</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="campaignNameCheck" />
+            </div>
+            <div class="field-name">Campaign Name</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="campaignTermCheck" />
+            </div>
+            <div class="field-name">Campaign Term</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="campaignContentCheck" />
+            </div>
+            <div class="field-name">Campaign Content</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="leadDateCheck" />
+            </div>
+            <div class="field-name">Lead Date</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="createdByCheck" />
+            </div>
+            <div class="field-name">Created By</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Last Call Info Section -->
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="lastCallInfoCheck" />
+          </div>
+          <div class="field-name">Last Call Info</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="callerNameCheck" />
+            </div>
+            <div class="field-name">Caller Name</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="lastCallTimeCheck" />
+            </div>
+            <div class="field-name">Last Call Time</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="callDurationCheck" />
+            </div>
+            <div class="field-name">Call Duration</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="lastCallStatusCheck" />
+            </div>
+            <div class="field-name">Last Call Status</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="reasonForNotConnectedCheck" />
+            </div>
+            <div class="field-name">Reason for Not Connected</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="isCallMissedCheck" />
+            </div>
+            <div class="field-name">Is Call Missed?</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="contactReferenceCheck" />
+            </div>
+            <div class="field-name">Contact Reference</div>
+            <div class="field-actions">
+              <a href="#" class="edit-link">Edit</a>
+              <a href="#" class="hide-link">Hide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calls Section -->
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="callsCheck" />
+          </div>
+          <div class="field-name">Calls</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="callHistoryCheck" />
+            </div>
+            <div class="field-name">Call History</div>
+            <div class="field-actions">
+              <a href="#" class="unhide-link">UnHide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activities Section -->
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="activitiesCheck" />
+          </div>
+          <div class="field-name">Activities</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="tasksCheck" />
+            </div>
+            <div class="field-name">Tasks</div>
+            <div class="field-actions">
+              <a href="#" class="unhide-link">UnHide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Section -->
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="notesCheck" />
+          </div>
+          <div class="field-name">Notes</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="notesContentCheck" />
+            </div>
+            <div class="field-name">Notes</div>
+            <div class="field-actions">
+              <a href="#" class="unhide-link">UnHide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History Section -->
+      <div class="field-group">
+        <div class="field-row">
+          <div class="field-checkbox">
+            <input type="checkbox" id="historyCheck" />
+          </div>
+          <div class="field-name">History</div>
+          <div class="field-controls">
+            <button class="edit"></button>
+            <button class="move-up"></button>
+            <button class="move-down"></button>
+            <label class="show-default">
+              <input type="checkbox" checked />
+              <span>Show Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sub-fields">
+          <div class="field-row sub-field">
+            <div class="field-checkbox">
+              <input type="checkbox" id="leadsHistoryCheck" />
+            </div>
+            <div class="field-name">Leads History</div>
+            <div class="field-actions">
+              <a href="#" class="unhide-link">UnHide</a>
+            </div>
+          </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Field-customisation.js"></script>
+    <style>
+      /* Modal Base Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal.show {
+        display: flex;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 8px;
+        padding: 24px;
+        width: 90%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .modal h2 {
+        margin: 0 0 24px;
+        color: #111827;
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #374151;
+        font-weight: 500;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+
+      .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .btn-save,
+      .btn-cancel {
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-save {
+        background: #059669;
+        color: white;
+        border: none;
+      }
+
+      .btn-save:hover {
+        background: #047857;
+      }
+
+      .btn-cancel {
+        background: white;
+        color: #374151;
+        border: 1px solid #d1d5db;
+      }
+
+      .btn-cancel:hover {
+        background: #f3f4f6;
+      }
+
+      /* Alert Modal Styles */
+      .alert-modal .modal-content {
+        max-width: 400px;
+        padding: 24px;
+        text-align: center;
+      }
+
+      .alert-title {
+        color: #059669;
+        margin: 0 0 16px 0;
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      .alert-message {
+        color: #374151;
+        font-size: 16px;
+        margin: 0 0 24px 0;
+      }
+
+      .alert-modal .btn-ok {
+        background: linear-gradient(to bottom, #10b981, #059669);
+        color: white;
+        border: 1px solid #059669;
+        padding: 8px 24px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .alert-modal .btn-ok:hover {
+        background: linear-gradient(to bottom, #059669, #047857);
+        box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+      }
+
+      /* Edit Field Modal Specific Styles */
+      #editFieldModal .modal-content {
+        max-width: 500px;
+        padding: 24px;
+      }
+
+      #editFieldModal h2 {
+        font-size: 32px;
+        color: #111827;
+        margin: 0 0 24px 0;
+        font-weight: normal;
+      }
+
+      #editFieldModal .form-group {
+        margin-bottom: 20px;
+      }
+
+      #editFieldModal label {
+        display: block;
+        font-size: 16px;
+        color: #111827;
+        margin-bottom: 8px;
+      }
+
+      #editFieldModal .form-input {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background: white;
+      }
+
+      #editFieldModal .form-input.readonly {
+        background-color: #f3f4f6;
+        color: #374151;
+      }
+
+      #editFieldModal .form-input[readonly] {
+        background-color: #f3f4f6;
+        color: #374151;
+      }
+
+      #editFieldModal .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+
+      #editFieldModal .checkbox-label input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        border: 2px solid #d1d5db;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      #editFieldModal .checkbox-label input[type="checkbox"]:checked {
+        background-color: #059669;
+        border-color: #059669;
+      }
+
+      #editFieldModal .modal-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      #editFieldModal .btn-save,
+      #editFieldModal .btn-cancel {
+        padding: 8px 24px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      #editFieldModal .btn-save {
+        background: white;
+        color: #111827;
+        border: 1px solid #d1d5db;
+      }
+
+      #editFieldModal .btn-cancel {
+        background: white;
+        color: #374151;
+        border: 1px solid #d1d5db;
+      }
+
+      #editFieldModal .btn-save:hover,
+      #editFieldModal .btn-cancel:hover {
+        background: #f9fafb;
+        border-color: #9ca3af;
+      }
+
+      /* Search Mode Dropdown Styles */
+      .search-mode-dropdown {
+        position: relative;
+        width: 100%;
+      }
+
+      .search-mode-dropdown .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+        padding: 8px 12px;
+        background: white;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #374151;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .search-mode-dropdown .dropdown-toggle::after {
+        content: '';
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #6b7280;
+        margin-left: 8px;
+      }
+
+      .search-mode-dropdown .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin-top: 4px;
+        background: #4b5563;
+        border-radius: 6px;
+        padding: 4px 0;
+        display: none;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-mode-dropdown.open .dropdown-menu {
+        display: block;
+      }
+
+      .search-mode-dropdown .dropdown-item {
+        padding: 8px 12px;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .search-mode-dropdown .dropdown-item:hover {
+        background: #374151;
+      }
+
+      .search-mode-dropdown .dropdown-item.selected {
+        position: relative;
+        padding-left: 28px;
+      }
+
+      .search-mode-dropdown .dropdown-item.selected::before {
+        content: '✓';
+        position: absolute;
+        left: 12px;
+      }
+
+      /* Group Dropdown Specific Styles */
+      .group-dropdown .dropdown-menu {
+        background: #4b5563;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 0;
+        min-width: 150px;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      .group-dropdown .dropdown-item {
+        color: white;
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .group-dropdown .dropdown-item:hover {
+        background-color: #374151;
+      }
+
+      .group-dropdown .dropdown-item.selected {
+        background-color: #374151;
+      }
+
+      .group-dropdown .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+        padding: 8px 12px;
+        font-size: 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background: white;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .group-dropdown .dropdown-toggle::after {
+        content: '';
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #6b7280;
+        margin-left: 8px;
+      }
+
+      /* Common Dropdown Styles */
+      .dropdown {
+        position: relative;
+        width: 100%;
+      }
+
+      .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+        padding: 8px 12px;
+        background: white;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #374151;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin-top: 1px;
+        background: #4b5563;
+        border-radius: 6px;
+        padding: 4px 0;
+        display: none;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .dropdown.open .dropdown-menu {
+        display: block;
+      }
+
+      .dropdown-item {
+        padding: 8px 12px 8px 28px;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        position: relative;
+      }
+
+      .dropdown-item:hover {
+        background: #374151;
+      }
+
+      .dropdown-item.selected::before {
+        content: '✓';
+        position: absolute;
+        left: 12px;
+      }
+
+      /* Remove any conflicting styles */
+      .field-type-dropdown,
+      .search-mode-dropdown,
+      .group-dropdown {
+        all: unset;
+        position: relative;
+        width: 100%;
+      }
+    </style>
+</body>
+</html>
+

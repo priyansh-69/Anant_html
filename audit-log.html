@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Audit Log</title>
+    <link rel="stylesheet" href="Common.css" />
+    <link rel="stylesheet" href="Field-Customisation.css" />
+    <link rel="stylesheet" href="audit-log.css" />
+</head>
+<body>
+    <nav class="main-nav">
+        <a href="Field-customisation.html">Field Customization</a>
+        <a href="mobile-settings.html">User Mobile Settings</a>
+        <a href="distribution-rules.html">Distribution Rules</a>
+        <a href="sender-email.html">Sender Email Address</a>
+        <a href="import-log.html">Import Log</a>
+        <a href="audit-log.html" class="active">Audit Log</a>
+    </nav>
+
+    <!-- Main List View -->
+    <div id="listView" class="content-container">
+        <!-- Search and Controls Section -->
+        <div class="controls-section">
+            <div class="search-box">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <input type="text" placeholder="Search" />
+            </div>
+
+            <div class="table-controls">
+                <div class="records-per-page">
+                    <span>Records per page</span>
+                    <input type="number" value="50" min="1" />
+                </div>
+
+                <div class="pagination">
+                    <button class="first-page" title="First Page">⟪</button>
+                    <button class="prev-page" title="Previous Page">⟨</button>
+                    <span class="page-info">1 - 50 / 51391</span>
+                    <button class="next-page" title="Next Page">⟩</button>
+                    <button class="last-page" title="Last Page">⟫</button>
+                </div>
+
+                <div class="table-actions">
+                    <button class="refresh-btn" title="Refresh">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M8 4v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Refresh
+                    </button>
+                    <select class="sort-select">
+                        <option>Recently Created</option>
+                        <option>Oldest First</option>
+                    </select>
+                    <button class="export-btn" title="Export">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M14 10v2.8c0 .7-.6 1.2-1.2 1.2H3.2C2.5 14 2 13.4 2 12.8V10m6-6v8m0-8L4 7m4-3l4 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <button class="columns-btn" title="Columns">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audit Log Table -->
+        <div class="audit-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="checkbox-col">
+                            <input type="checkbox" />
+                        </th>
+                        <th>USER</th>
+                        <th>SCREEN NAME</th>
+                        <th>ACTIVITY</th>
+                        <th>DETAILS</th>
+                        <th>DEVICE</th>
+                        <th>PERFORMED AT</th>
+                        <th>LOCATION</th>
+                    </tr>
+                </thead>
+                <tbody id="auditTableBody">
+                    <!-- Rows will be added dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Detail View -->
+    <div id="detailView" class="detail-view" style="display: none;">
+        <div class="detail-header">
+            <button class="back-button">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15 10H5M5 10L10 15M5 10L10 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back
+            </button>
+            <div class="pagination-controls">
+                <button class="prev-record">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M12 15L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <span class="record-count">1/51393</span>
+                <button class="next-record">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M8 5L13 10L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="detail-content">
+            <div class="detail-section">
+                <h2>Basic Info</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>User</label>
+                        <span id="detailUser"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Screen Name</label>
+                        <span id="detailScreen"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Activity</label>
+                        <span id="detailActivity"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Details</label>
+                        <span id="detailDetails"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Device</label>
+                        <span id="detailDevice"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Performed At</label>
+                        <span id="detailPerformedAt"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Location</label>
+                        <span id="detailLocation"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-footer">
+                <div class="timestamp-info">
+                    <div>Created Time : <span id="detailCreatedTime"></span></div>
+                    <div>Modified Time : <span id="detailModifiedTime"></span></div>
+                    <div>Last Viewed Time : <span id="detailLastViewedTime"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="audit-log.js"></script>
+</body>
+</html> 

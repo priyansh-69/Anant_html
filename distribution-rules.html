@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Distribution Rules</title>
+    <link rel="stylesheet" href="Common.css" />
+    <link rel="stylesheet" href="Field-Customisation.css" />
+    <link rel="stylesheet" href="distribution-rules.css" />
+</head>
+<body>
+    <nav class="main-nav">
+        <a href="Field-customisation.html">Field Customization</a>
+        <a href="mobile-settings.html">User Mobile Settings</a>
+        <a href="distribution-rules.html" class="active">Distribution Rules</a>
+        <a href="sender-email.html">Sender Email Address</a>
+        <a href="import-log.html">Import Log</a>
+        <a href="audit-log.html">Audit Log</a>
+    </nav>
+
+    <div class="content-container">
+        <h1 class="page-title">DISTRIBUTION RULES</h1>
+        <p class="description">Create distribution rules for allocating users to records (Leads) using a round-robin approach based on their properties.</p>
+        
+        <button class="create-rule-btn" id="createRuleBtn">Create Rule</button>
+
+        <div id="noRulesMessage" style="text-align: center; color: #6b7280; font-style: italic; margin: 20px 0;">
+            No Rules Configured Yet!
+        </div>
+
+        <div class="rules-table" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>RULES</th>
+                        <th>USERS</th>
+                        <th>EDIT</th>
+                        <th>DELETE</th>
+                        <th>ORDER</th>
+                    </tr>
+                </thead>
+                <tbody id="rulesTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Rule Creation Form (Initially Hidden) -->
+        <div class="rule-form" id="ruleForm" style="display: none;">
+            <div class="match-options">
+                <label class="radio-label">
+                    <input type="radio" name="matchType" value="all" checked>
+                    <span>Match all the following</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="matchType" value="any">
+                    <span>Match any of the following</span>
+                </label>
+            </div>
+
+            <div class="conditions-container" id="conditionsContainer">
+                <div class="condition-row">
+                    <select class="condition-prefix" style="width: 70px; padding: 8px; border: 1px solid #e2e8f0; border-radius: 4px; background-color: white; color: #374151; font-size: 14px;">
+                        <option value="AND">AND</option>
+                        <option value="OR">OR</option>
+                    </select>
+                    <select class="field-select">
+                        <option>Contact Name</option>
+                        <option>Email Address</option>
+                        <option>Mobile Number</option>
+                        <option>Lead Owner</option>
+                        <option>Lead Stage</option>
+                        <option>Expected Revenue</option>
+                        <option>Expected Closing Date</option>
+                        <option>Lead Source</option>
+                        <option>Campaign Name</option>
+                        <option>Created By</option>
+                        <option>Lead Date</option>
+                        <option>Deal Price</option>
+                        <option>Last Call Time</option>
+                        <option>Last Call Status</option>
+                        <option>Next Follow-up On</option>
+                        <option>Is Call Missed?</option>
+                        <option>Reason for Not Connected</option>
+                        <option>Deal No Of Cents</option>
+                        <option>Deal Total Value</option>
+                        <option>category</option>
+                    </select>
+                    <select class="operator-select">
+                        <option>is</option>
+                        <option>is not</option>
+                        <option>begins with</option>
+                        <option>ends with</option>
+                        <option>contains</option>
+                        <option>not contains</option>
+                        <option>is not empty</option>
+                        <option>is empty</option>
+                        <option>duplicate more than</option>
+                    </select>
+                    <input type="text" class="value-input" placeholder="Enter value">
+                    <button class="more-btn">▼ More</button>
+                </div>
+            </div>
+
+            <div class="user-section">
+                <div class="user-input-container">
+                    <label>User</label>
+                    <div class="user-input-wrapper">
+                        <input type="text" class="user-input" placeholder="Select user">
+                        <button class="user-select-btn">👤</button>
+                    </div>
+                </div>
+                
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>S.NO</th>
+                            <th>USER</th>
+                            <th>LAST ASSIGNED DATE</th>
+                            <th>NEXT PRIORITY</th>
+                            <th>REMOVE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- User rows will be added dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="action-buttons">
+                <button class="save-btn">Save</button>
+                <button class="cancel-btn" id="cancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="userModal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+            <h2>User</h2>
+            <div class="modal-header">
+                <input type="text" placeholder="Search..." class="search-input">
+                <button class="load-btn">Load</button>
+            </div>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>EMAIL</th>
+                        <th>MOBILE</th>
+                        <th>PROFILE</th>
+                        <th>REPORTING TO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- User data will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="distribution-rules.js"></script>
+</body>
+</html> 
