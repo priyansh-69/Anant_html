@@ -7,6 +7,322 @@
     <link rel="stylesheet" href="Common.css" />
     <link rel="stylesheet" href="Field-Customisation.css" />
     <link rel="stylesheet" href="audit-log.css" />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            font-size: 14px;
+            color: #212529;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+
+        /* Navigation bar styles */
+        .main-nav {
+            display: flex;
+            background-color: #f8faff;
+            padding: 0 16px;
+            border-bottom: 1px solid #e5e7eb;
+            overflow-x: auto;
+        }
+
+        .main-nav a {
+            padding: 16px;
+            color: #6B7280;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .main-nav a:hover {
+            color: rgb(35, 174, 115);
+        }
+
+        .main-nav a.active {
+            color: rgb(35, 174, 115);
+            border-bottom: 2px solid rgb(35, 174, 115);
+        }
+
+        /* Search Container Styles */
+        .search-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .search-type-toggle {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            margin-bottom: 24px;
+            padding-left: 20px;
+        }
+
+        .search-type-toggle button {
+            padding: 8px 24px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #495057;
+            min-width: 120px;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn.active {
+            background-color: rgba(35, 174, 115, 0.1) !important;
+            border-color: rgb(35, 174, 115) !important;
+            color: rgb(35, 174, 115) !important;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-item label {
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .filter-item input, .filter-item select {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            color: #495057;
+            transition: border-color 0.15s ease-in-out;
+        }
+
+        /* Table Styles */
+        .table-section {
+            padding: 0 24px 24px;
+        }
+
+        .table-container {
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+
+        .table-section table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        .table-section th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            font-size: 13px;
+            color: #495057;
+            padding: 12px 16px;
+            border-bottom: 2px solid #dee2e6;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            text-align: left;
+        }
+
+        .table-section td {
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #212529;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        /* Pagination Styles */
+        .pagination-container {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 8px 16px;
+            margin-bottom: 16px;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            border-left: 4px solid rgb(35, 174, 115);
+            padding-left: 12px;
+        }
+
+        .records-label {
+            margin-right: 10px;
+            color: #212529;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .records-select {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid #dee2e6;
+            background-color: white;
+            cursor: pointer;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .pagination-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin: 0 4px;
+            color: #495057;
+            font-size: 16px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .pagination-button:hover {
+            background-color: rgba(35, 174, 115, 0.1);
+            color: rgb(35, 174, 115);
+        }
+
+        .pagination-info {
+            margin: 0 12px;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .search-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .search-actions button {
+            padding: 8px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            min-width: 120px;
+        }
+
+        .search-actions button:first-child {
+            background-color: rgb(35, 174, 115);
+            border: none;
+            color: white;
+        }
+
+        .search-actions button:not(:first-child) {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            color: #495057;
+        }
+
+        /* Additional styles for enhanced search functionality */
+        .radio-label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .radio-label input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        .condition-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .field-select, .operator-select {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #495057;
+            min-width: 150px;
+        }
+
+        .more-btn {
+            padding: 8px 16px;
+            background-color: rgb(35, 174, 115);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .delete-btn {
+            padding: 8px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #dc3545;
+            font-size: 14px;
+        }
+
+        .delete-btn:hover {
+            background-color: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .search-btn {
+            background-color: rgb(35, 174, 115);
+            color: white;
+            border: none;
+        }
+
+        .clear-btn, .cancel-btn {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+
+        /* Date range picker styles */
+        .filter-item input[type="datetime-local"] {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #495057;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <nav class="main-nav">
@@ -18,78 +334,179 @@
         <a href="audit-log.html" class="active">Audit Log</a>
     </nav>
 
-    <!-- Main List View -->
-    <div id="listView" class="content-container">
-        <!-- Search and Controls Section -->
-        <div class="controls-section">
-            <div class="search-box">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <input type="text" placeholder="Search" />
+    <div class="container">
+        <!-- Search Button -->
+        <div style="padding: 20px 0;">
+            <div class="header-center" style="display: flex; justify-content: center; width: 100%;">
+                <button id="searchBtn" onclick="showSearch()" style="display: block; padding: 8px 24px; background-color: #fff; border: 1px solid #dee2e6; border-radius: 50px; cursor: pointer; font-size: 14px; color: #495057; min-width: 120px;">Search</button>
             </div>
+        </div>
 
-            <div class="table-controls">
-                <div class="records-per-page">
-                    <span>Records per page</span>
-                    <input type="number" value="50" min="1" />
+        <!-- Search Section -->
+        <div id="searchSection" style="display: none; padding: 20px; background-color: #f8faff;">
+            <div class="search-container">
+                <div class="search-header">
+                    <div class="search-type-toggle">
+                        <button onclick="toggleSearchType('basic')" class="toggle-btn active" id="basicSearchBtn">Basic Search</button>
+                        <button onclick="toggleSearchType('advanced')" class="toggle-btn" id="advancedSearchBtn">Advanced Search</button>
+                    </div>
                 </div>
 
-                <div class="pagination">
-                    <button class="first-page" title="First Page">⟪</button>
-                    <button class="prev-page" title="Previous Page">⟨</button>
-                    <span class="page-info">1 - 50 / 51391</span>
-                    <button class="next-page" title="Next Page">⟩</button>
-                    <button class="last-page" title="Last Page">⟫</button>
+                <!-- Basic Search -->
+                <div id="basicSearch" style="margin-top: 20px;">
+                    <div class="filter-grid">
+                        <div class="filter-item">
+                            <label>User Name</label>
+                            <input type="text" placeholder="Enter user name">
+                        </div>
+                        <div class="filter-item">
+                            <label>Action Type</label>
+                            <select>
+                                <option value="">Select Action</option>
+                                <option value="create">Create</option>
+                                <option value="update">Update</option>
+                                <option value="delete">Delete</option>
+                                <option value="view">View</option>
+                                <option value="export">Export</option>
+                                <option value="import">Import</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>Module</label>
+                            <select>
+                                <option value="">Select Module</option>
+                                <option value="users">Users</option>
+                                <option value="settings">Settings</option>
+                                <option value="permissions">Permissions</option>
+                                <option value="fields">Fields</option>
+                                <option value="reports">Reports</option>
+                                <option value="audit">Audit</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>Start Date</label>
+                            <input type="datetime-local">
+                        </div>
+                        <div class="filter-item">
+                            <label>End Date</label>
+                            <input type="datetime-local">
+                        </div>
+                        <div class="filter-item">
+                            <label>IP Address</label>
+                            <input type="text" placeholder="Enter IP address">
+                        </div>
+                        <div class="filter-item">
+                            <label>Description</label>
+                            <input type="text" placeholder="Enter description keywords">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="table-actions">
-                    <button class="refresh-btn" title="Refresh">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8z" stroke="currentColor" stroke-width="2"/>
-                            <path d="M8 4v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Refresh
-                    </button>
-                    <select class="sort-select">
-                        <option>Recently Created</option>
-                        <option>Oldest First</option>
-                    </select>
-                    <button class="export-btn" title="Export">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M14 10v2.8c0 .7-.6 1.2-1.2 1.2H3.2C2.5 14 2 13.4 2 12.8V10m6-6v8m0-8L4 7m4-3l4 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                    <button class="columns-btn" title="Columns">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
+                <!-- Advanced Search -->
+                <div class="rule-form" id="advancedSearch" style="display: none;">
+                    <div class="match-options">
+                        <label class="radio-label">
+                            <input type="radio" name="matchType" value="all" checked>
+                            <span>Match all conditions (AND)</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="matchType" value="any">
+                            <span>Match any condition (OR)</span>
+                        </label>
+                    </div>
+
+                    <div class="conditions-container" id="conditionsContainer">
+                        <div class="condition-row">
+                            <select class="condition-prefix" style="width: 70px;">
+                                <option value="AND">AND</option>
+                                <option value="OR">OR</option>
+                            </select>
+                            <select class="field-select">
+                                <option value="username">User Name</option>
+                                <option value="action">Action Type</option>
+                                <option value="module">Module</option>
+                                <option value="date">Date</option>
+                                <option value="ip">IP Address</option>
+                                <option value="description">Description</option>
+                                <option value="device">Device</option>
+                                <option value="location">Location</option>
+                            </select>
+                            <select class="operator-select">
+                                <option value="equals">equals</option>
+                                <option value="not_equals">does not equal</option>
+                                <option value="contains">contains</option>
+                                <option value="not_contains">does not contain</option>
+                                <option value="starts_with">starts with</option>
+                                <option value="ends_with">ends with</option>
+                                <option value="greater_than">greater than</option>
+                                <option value="less_than">less than</option>
+                                <option value="between">between</option>
+                                <option value="in">in</option>
+                                <option value="not_in">not in</option>
+                            </select>
+                            <input type="text" class="value-input" placeholder="Enter value">
+                            <button class="more-btn" onclick="addConditionRow()">Add Condition</button>
+                            <button class="delete-btn" onclick="deleteConditionRow(this)" style="display: none;">✕</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons Section -->
+                <div class="search-actions">
+                    <button onclick="performSearch()" class="search-btn">Search</button>
+                    <button onclick="resetFilters()" class="clear-btn">Clear</button>
+                    <button onclick="cancelSearch()" class="cancel-btn">Cancel</button>
                 </div>
             </div>
         </div>
 
-        <!-- Audit Log Table -->
-        <div class="audit-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="checkbox-col">
-                            <input type="checkbox" />
-                        </th>
-                        <th>USER</th>
-                        <th>SCREEN NAME</th>
-                        <th>ACTIVITY</th>
-                        <th>DETAILS</th>
-                        <th>DEVICE</th>
-                        <th>PERFORMED AT</th>
-                        <th>LOCATION</th>
-                    </tr>
-                </thead>
-                <tbody id="auditTableBody">
-                    <!-- Rows will be added dynamically -->
-                </tbody>
-            </table>
+        <!-- Table Section -->
+        <div class="table-section">
+            <!-- Pagination Interface -->
+            <div class="pagination-container">
+                <div class="left-section">
+                    <span class="records-label">Records per page</span>
+                    <select class="records-select" onchange="changeRecordsPerPage(this.value)">
+                        <option value="50" selected>50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                    </select>
+                </div>
+                
+                <div class="pagination-controls">
+                    <button class="pagination-button" onclick="goToFirstPage()" title="First page">⏮</button>
+                    <button class="pagination-button" onclick="goToPreviousPage()" title="Previous page">◀</button>
+                    <span class="pagination-info">1 - 50 / 200</span>
+                    <button class="pagination-button" onclick="goToNextPage()" title="Next page">▶</button>
+                    <button class="pagination-button" onclick="goToLastPage()" title="Last page">⏭</button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Module</th>
+                            <th>Description</th>
+                            <th>IP Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-03-26 14:30:45</td>
+                            <td>admin</td>
+                            <td>Update</td>
+                            <td>User Settings</td>
+                            <td>Modified user permissions for mobile app</td>
+                            <td>192.168.1.100</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -163,5 +580,278 @@
     </div>
 
     <script src="audit-log.js"></script>
+    <script>
+        // Show search section
+        function showSearch() {
+            document.getElementById('searchSection').style.display = 'block';
+            document.getElementById('searchBtn').style.display = 'none';
+            document.getElementById('basicSearch').style.display = 'block';
+            document.getElementById('advancedSearch').style.display = 'none';
+        }
+
+        // Toggle between basic and advanced search
+        function toggleSearchType(type) {
+            const basicBtn = document.getElementById('basicSearchBtn');
+            const advancedBtn = document.getElementById('advancedSearchBtn');
+            const basicSearch = document.getElementById('basicSearch');
+            const advancedSearch = document.getElementById('advancedSearch');
+
+            if (type === 'basic') {
+                basicBtn.classList.add('active');
+                advancedBtn.classList.remove('active');
+                basicSearch.style.display = 'block';
+                advancedSearch.style.display = 'none';
+            } else {
+                basicBtn.classList.remove('active');
+                advancedBtn.classList.add('active');
+                basicSearch.style.display = 'none';
+                advancedSearch.style.display = 'block';
+            }
+        }
+
+        // Reset filters and hide search
+        function resetFilters() {
+            const inputs = document.querySelectorAll('.filter-item input, .filter-item select, .input-box, .value-input');
+            inputs.forEach(input => {
+                if (input.type === 'select-one') {
+                    input.selectedIndex = 0;
+                } else {
+                    input.value = '';
+                }
+            });
+            
+            const rows = document.querySelectorAll('.table-section table tbody tr');
+            rows.forEach(row => row.style.display = '');
+
+            document.getElementById('searchSection').style.display = 'none';
+            document.getElementById('searchBtn').style.display = 'block';
+        }
+
+        // Add new condition row in Advanced Search
+        function addConditionRow() {
+            const container = document.getElementById('conditionsContainer');
+            const rows = container.getElementsByClassName('condition-row');
+            const firstRow = rows[0];
+            
+            const newRow = firstRow.cloneNode(true);
+            newRow.querySelector('.value-input').value = '';
+            
+            const deleteBtn = newRow.querySelector('.delete-btn');
+            deleteBtn.style.display = 'block';
+            
+            container.appendChild(newRow);
+            
+            if (rows.length > 0) {
+                Array.from(rows).forEach(row => {
+                    row.querySelector('.delete-btn').style.display = 'block';
+                });
+            }
+            
+            if (rows.length === 1) {
+                rows[0].querySelector('.delete-btn').style.display = 'none';
+            }
+        }
+
+        // Delete condition row
+        function deleteConditionRow(button) {
+            const container = document.getElementById('conditionsContainer');
+            const rows = container.getElementsByClassName('condition-row');
+            
+            if (rows.length === 1) {
+                return;
+            }
+            
+            const row = button.closest('.condition-row');
+            row.remove();
+            
+            if (rows.length === 1) {
+                rows[0].querySelector('.delete-btn').style.display = 'none';
+            }
+        }
+
+        // Pagination functions
+        function changeRecordsPerPage(value) {
+            // Implement the logic to change records per page
+            console.log('Records per page changed to:', value);
+        }
+
+        function goToFirstPage() {
+            // Implement first page logic
+            console.log('Going to first page');
+        }
+
+        function goToPreviousPage() {
+            // Implement previous page logic
+            console.log('Going to previous page');
+        }
+
+        function goToNextPage() {
+            // Implement next page logic
+            console.log('Going to next page');
+        }
+
+        function goToLastPage() {
+            // Implement last page logic
+            console.log('Going to last page');
+        }
+
+        // Search function
+        function performSearch() {
+            const isAdvancedSearch = document.getElementById('advancedSearch').style.display !== 'none';
+            
+            if (isAdvancedSearch) {
+                performAdvancedSearch();
+            } else {
+                performBasicSearch();
+            }
+        }
+
+        function performBasicSearch() {
+            const filters = {};
+            document.querySelectorAll('#basicSearch .filter-item').forEach(item => {
+                const label = item.querySelector('label').textContent;
+                const input = item.querySelector('input, select');
+                const value = input.value;
+                if (value) {
+                    filters[label] = value;
+                }
+            });
+            
+            // Filter table rows based on the filters
+            const rows = document.querySelectorAll('.table-section table tbody tr');
+            rows.forEach(row => {
+                let showRow = true;
+                const cells = row.querySelectorAll('td');
+                
+                Object.entries(filters).forEach(([label, value]) => {
+                    const cellIndex = getColumnIndex(label);
+                    if (cellIndex !== -1) {
+                        const cellText = cells[cellIndex].textContent.toLowerCase();
+                        if (!cellText.includes(value.toLowerCase())) {
+                            showRow = false;
+                        }
+                    }
+                });
+                
+                row.style.display = showRow ? '' : 'none';
+            });
+        }
+
+        function performAdvancedSearch() {
+            const matchType = document.querySelector('input[name="matchType"]:checked').value;
+            const conditions = [];
+            
+            document.querySelectorAll('.condition-row').forEach(row => {
+                const condition = {
+                    prefix: row.querySelector('.condition-prefix').value,
+                    field: row.querySelector('.field-select').value,
+                    operator: row.querySelector('.operator-select').value,
+                    value: row.querySelector('.value-input').value
+                };
+                conditions.push(condition);
+            });
+
+            // Filter table based on conditions
+            const rows = document.querySelectorAll('.table-section table tbody tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                let showRow = matchType === 'all';
+
+                conditions.forEach(condition => {
+                    const cellIndex = getColumnIndexByField(condition.field);
+                    if (cellIndex !== -1) {
+                        const cellValue = cells[cellIndex].textContent.toLowerCase();
+                        const conditionValue = condition.value.toLowerCase();
+                        let matches = false;
+
+                        switch (condition.operator) {
+                            case 'equals':
+                                matches = cellValue === conditionValue;
+                                break;
+                            case 'not_equals':
+                                matches = cellValue !== conditionValue;
+                                break;
+                            case 'contains':
+                                matches = cellValue.includes(conditionValue);
+                                break;
+                            case 'not_contains':
+                                matches = !cellValue.includes(conditionValue);
+                                break;
+                            case 'starts_with':
+                                matches = cellValue.startsWith(conditionValue);
+                                break;
+                            case 'ends_with':
+                                matches = cellValue.endsWith(conditionValue);
+                                break;
+                            // Add more operators as needed
+                        }
+
+                        if (matchType === 'all') {
+                            showRow = showRow && matches;
+                        } else {
+                            showRow = showRow || matches;
+                        }
+                    }
+                });
+
+                row.style.display = showRow ? '' : 'none';
+            });
+        }
+
+        function getColumnIndex(label) {
+            const headers = document.querySelectorAll('.table-section table th');
+            for (let i = 0; i < headers.length; i++) {
+                if (headers[i].textContent.trim() === label) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        function getColumnIndexByField(field) {
+            const fieldToColumnMap = {
+                'username': 1,  // User column
+                'action': 2,    // Action column
+                'module': 3,    // Module column
+                'date': 0,      // Date & Time column
+                'ip': 5,        // IP Address column
+                'description': 4 // Description column
+            };
+            return fieldToColumnMap[field] || -1;
+        }
+
+        function cancelSearch() {
+            resetFilters();
+        }
+
+        // Update operator options based on field selection
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('field-select')) {
+                const operatorSelect = e.target.parentElement.querySelector('.operator-select');
+                const field = e.target.value;
+                
+                // Clear existing options
+                operatorSelect.innerHTML = '';
+                
+                // Add appropriate operators based on field type
+                if (field === 'date') {
+                    ['equals', 'not_equals', 'greater_than', 'less_than', 'between'].forEach(op => {
+                        const option = new Option(op.replace('_', ' '), op);
+                        operatorSelect.add(option);
+                    });
+                } else if (field === 'action' || field === 'module') {
+                    ['equals', 'not_equals', 'in', 'not_in'].forEach(op => {
+                        const option = new Option(op.replace('_', ' '), op);
+                        operatorSelect.add(option);
+                    });
+                } else {
+                    ['equals', 'not_equals', 'contains', 'not_contains', 'starts_with', 'ends_with'].forEach(op => {
+                        const option = new Option(op.replace('_', ' '), op);
+                        operatorSelect.add(option);
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html> 

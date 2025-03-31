@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Import Log</title>
+    <link rel="stylesheet" href="Common.css" />
+    <link rel="stylesheet" href="Field-customisation.css" />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            font-size: 14px;
+            color: #212529;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            padding: 20px;
+        }
+
+        /* Search Button Styling */
+        .header-center {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        #searchBtn {
+            padding: 8px 24px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #495057;
+            min-width: 120px;
+            transition: all 0.2s ease;
+        }
+
+        #searchBtn:hover {
+            background-color: rgba(231, 70, 25, 0.1);
+            color: rgb(35, 174, 115);
+            border-color: rgb(35, 174, 115);
+        }
+
+        /* Search Section Styling */
+        #searchSection {
+            display: none;
+            padding: 20px;
+            background-color: #f8faff;
+        }
+
+        .search-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 24px;
+            margin: 0 auto;
+            max-width: 1400px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-item label {
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .filter-item input {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            color: #495057;
+            transition: border-color 0.15s ease-in-out;
+        }
+
+        .search-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .search-actions button {
+            padding: 8px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            min-width: 120px;
+            transition: all 0.2s ease;
+        }
+
+        .search-actions button:first-child {
+            background-color: rgb(35, 174, 115);
+            border: none;
+            color: white;
+        }
+
+        .search-actions button:not(:first-child) {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            color: #495057;
+        }
+
+        .search-actions button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .search-actions button:first-child:hover {
+            background-color: rgb(28, 139, 92);
+        }
+
+        .search-actions button:not(:first-child):hover {
+            background-color: rgba(35, 174, 115, 0.1);
+            color: rgb(35, 174, 115);
+            border-color: rgb(35, 174, 115);
+        }
+
+        .filter-item input:focus {
+            border-color: rgb(35, 174, 115);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(35, 174, 115, 0.1);
+        }
+
+        /* Table Styling */
+        .table-container {
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background-color: #fff;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid #dee2e6;
+            font-weight: 600;
+            color: #495057;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #dee2e6;
+            color: #212529;
+            vertical-align: middle;
+        }
+        
+        tbody tr:hover {
+            background-color: rgba(35, 174, 115, 0.1);
+        }
+        
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+        
+        .success {
+            color: #28a745;
+            font-weight: 500;
+        }
+        
+        .partial-failed {
+            color: #dc3545;
+            font-weight: 500;
+        }
+        
+        .open {
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        /* Pagination Styling */
+        .pagination-container {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 8px 16px;
+            margin-bottom: 16px;
+        }
+        
+        .left-section {
+            display: flex;
+            align-items: center;
+            border-left: 4px solid rgb(35, 174, 115);
+            padding-left: 12px;
+        }
+        
+        .records-label {
+            margin-right: 10px;
+            color: #212529;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .records-select {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid #dee2e6;
+            background-color: white;
+            cursor: pointer;
+            font-size: 14px;
+            color: #495057;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+        }
+        
+        .pagination-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin: 0 4px;
+            color: #495057;
+            font-size: 16px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .pagination-button:hover {
+            background-color: rgba(35, 174, 115, 0.1);
+            color: rgb(35, 174, 115);
+        }
+        
+        .pagination-info {
+            margin: 0 12px;
+            font-size: 14px;
+            color: #495057;
+        }
+        
+        .refresh-button {
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: #495057;
+            font-size: 14px;
+            margin-right: 20px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <a href="Field-customisation.html">Field Customization</a>
+        <a href="userseting.html">User Mobile Settings</a>
+        <a href="distribution-rules.html">Distribution Rules</a>
+        <a href="sender-email.html">Sender Email Address</a>
+        <a href="import-log.html" class="active">Import Log</a>
+        <a href="audit-log.html">Audit Log</a>
+    </nav>
+
+    <div class="container">
+        <!-- Search Button -->
+        <div class="header-center">
+            <button id="searchBtn" onclick="showSearch()">Search</button>
+        </div>
+
+        <!-- Search Section -->
+        <div id="searchSection">
+            <div class="search-container">
+                <div class="filter-grid">
+                    <div class="filter-item">
+                        <label>Import Date</label>
+                        <input type="date">
+                    </div>
+                    <div class="filter-item">
+                        <label>File Name</label>
+                        <input type="text">
+                    </div>
+                    <div class="filter-item">
+                        <label>Status</label>
+                        <input type="text" placeholder="Success/Open/Partial Failed">
+                    </div>
+                    <div class="filter-item">
+                        <label>Updated Username</label>
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="search-actions">
+                    <button onclick="performSearch()">Search</button>
+                    <button onclick="resetFilters()">Clear</button>
+                    <button onclick="cancelSearch()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+            <div class="left-section">
+                <span class="records-label">Records per page</span>
+                <select class="records-select">
+                    <option value="50" selected>50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                </select>
+            </div>
+            
+            <div class="pagination-controls">
+                <button class="pagination-button" title="First page">⏮</button>
+                <button class="pagination-button" title="Previous page">◀</button>
+                <span class="pagination-info">1 - 14 / 14</span>
+                <button class="pagination-button" title="Next page">▶</button>
+                <button class="pagination-button" title="Last page">⏭</button>
+                <button class="refresh-button">
+                    <span style="margin-right: 5px;">⟳</span>
+                    Refresh
+                </button>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" class="checkbox"></th>
+                        <th>IMPORT DATE</th>
+                        <th>FILE NAME</th>
+                        <th>RECORDS CREATED</th>
+                        <th>RECORDS UPDATE</th>
+                        <th>RECORDS IGNORED</th>
+                        <th>STATUS</th>
+                        <th>UPDATED USERNAME</th>
+                        <th>UPDATED TIME</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>28-Mar-2025 05:41 PM</td>
+                        <td>Leads.csv</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td class="success">Success</td>
+                        <td>TESTING</td>
+                        <td>28-Mar-2025 05:41 PM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>28-Mar-2025 03:07 PM</td>
+                        <td>Leads (2).csv</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="open">Open</td>
+                        <td>TESTING</td>
+                        <td>28-Mar-2025 03:07 PM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>28-Mar-2025 12:59 PM</td>
+                        <td>Leads (2).csv</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="open">Open</td>
+                        <td>TESTING</td>
+                        <td>28-Mar-2025 12:59 PM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>28-Mar-2025 12:27 PM</td>
+                        <td>samplelead.csv</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="open">Open</td>
+                        <td>TESTING</td>
+                        <td>28-Mar-2025 12:27 PM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>26-Mar-2025 02:57 PM</td>
+                        <td>Leads.csv</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="open">Open</td>
+                        <td>Subramanyam</td>
+                        <td>26-Mar-2025 02:57 PM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>26-Mar-2025 02:56 PM</td>
+                        <td>Leads.csv</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="open">Open</td>
+                        <td>Subramanyam</td>
+                        <td>26-Mar-2025 02:56 PM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>25-Mar-2025 09:42 AM</td>
+                        <td>organization.csv</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="open">Open</td>
+                        <td>Subramanyam</td>
+                        <td>25-Mar-2025 09:42 AM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>25-Mar-2025 09:22 AM</td>
+                        <td>lead.csv</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="open">Open</td>
+                        <td>Subramanyam</td>
+                        <td>25-Mar-2025 09:22 AM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>24-Mar-2025 07:25 PM</td>
+                        <td>leads_allColumnRecords_2025-03-24 (2).csv</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="open">Open</td>
+                        <td>TESTING</td>
+                        <td>24-Mar-2025 07:25 PM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>24-Mar-2025 06:46 PM</td>
+                        <td>leads_allColumnRecords_2025-03-24 (2).csv</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="open">Open</td>
+                        <td>TESTING</td>
+                        <td>24-Mar-2025 06:46 PM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>21-Feb-2025 05:01 PM</td>
+                        <td>shailaja.csv</td>
+                        <td>0</td>
+                        <td>43</td>
+                        <td>239</td>
+                        <td class="partial-failed">Partial Failed</td>
+                        <td>Subramanyam</td>
+                        <td>21-Feb-2025 05:01 PM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>13-Feb-2025 04:14 PM</td>
+                        <td>divya sample data.csv</td>
+                        <td>87</td>
+                        <td>0</td>
+                        <td>17</td>
+                        <td class="partial-failed">Partial Failed</td>
+                        <td>Subramanyam</td>
+                        <td>13-Feb-2025 04:14 PM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>12-Feb-2025 11:59 AM</td>
+                        <td>MArketing data by suresh &Naveen.csv</td>
+                        <td>901</td>
+                        <td>0</td>
+                        <td>855</td>
+                        <td class="partial-failed">Partial Failed</td>
+                        <td>Subramanyam</td>
+                        <td>12-Feb-2025 11:59 AM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td>12-Feb-2025 11:55 AM</td>
+                        <td>MArketing data by suresh &Naveen.csv</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="open">Open</td>
+                        <td>Subramanyam</td>
+                        <td>12-Feb-2025 11:55 AM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Show search section with animation
+        function showSearch() {
+            const searchSection = document.getElementById('searchSection');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            searchSection.style.display = 'block';
+            searchBtn.style.display = 'none';
+            
+            // Clear any existing filters
+            resetFilters();
+            
+            // Focus on first input
+            const firstInput = document.querySelector('.filter-item input');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }
+
+        // Reset filters and hide search
+        function resetFilters() {
+            const inputs = document.querySelectorAll('.filter-item input');
+            inputs.forEach(input => input.value = '');
+            
+            const rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(row => row.style.display = '');
+        }
+
+        // Cancel search
+        function cancelSearch() {
+            resetFilters();
+            document.getElementById('searchSection').style.display = 'none';
+            document.getElementById('searchBtn').style.display = 'block';
+        }
+
+        // Perform search with improved filtering
+        function performSearch() {
+            const filterItems = document.querySelectorAll('.filter-item');
+            const rows = document.querySelectorAll('table tbody tr');
+            
+            rows.forEach(row => {
+                let showRow = true;
+                filterItems.forEach(item => {
+                    const input = item.querySelector('input');
+                    const value = input.value.trim().toLowerCase();
+                    if (value) {
+                        const label = item.querySelector('label').textContent.trim();
+                        const cellIndex = Array.from(row.parentElement.parentElement.querySelector('thead tr').cells)
+                            .findIndex(cell => cell.textContent.includes(label.toUpperCase()));
+                        
+                        if (cellIndex > -1) {
+                            const cellValue = row.cells[cellIndex].textContent.toLowerCase();
+                            
+                            // Handle date inputs specially
+                            if (input.type === 'date') {
+                                const searchDate = new Date(value);
+                                const cellDate = new Date(cellValue);
+                                if (searchDate.toDateString() !== cellDate.toDateString()) {
+                                    showRow = false;
+                                }
+                            } else {
+                                // For text inputs, use includes for partial matches
+                                if (!cellValue.includes(value)) {
+                                    showRow = false;
+                                }
+                            }
+                        }
+                    }
+                });
+                row.style.display = showRow ? '' : 'none';
+            });
+
+            // Update the pagination info after search
+            updatePaginationInfo();
+        }
+
+        // Add new function to update pagination info
+        function updatePaginationInfo() {
+            const visibleRows = document.querySelectorAll('table tbody tr:not([style*="display: none"])');
+            const totalRows = document.querySelectorAll('table tbody tr').length;
+            const paginationInfo = document.querySelector('.pagination-info');
+            
+            if (paginationInfo) {
+                paginationInfo.textContent = `${visibleRows.length} / ${totalRows}`;
+            }
+        }
+
+        // Add event listeners for real-time search
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.filter-item input');
+            inputs.forEach(input => {
+                input.addEventListener('input', performSearch);
+            });
+
+            // Add event listener for records per page
+            const recordsSelect = document.querySelector('.records-select');
+            if (recordsSelect) {
+                recordsSelect.addEventListener('change', function() {
+                    // Implement pagination logic here
+                    console.log('Records per page changed to:', this.value);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
