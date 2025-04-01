@@ -91,30 +91,34 @@
 
         /* Navigation bar styles */
         .main-nav {
+            background-color: #fff;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
             display: flex;
-            background-color: #f8faff;
-            padding: 0 16px;
-            border-bottom: 1px solid #e5e7eb;
-            overflow-x: auto;
+            gap: 20px;
+            align-items: center;
         }
 
         .main-nav a {
-            padding: 16px;
-            color: #6B7280;
+            color: #495057;
             text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 4px;
             transition: all 0.2s ease;
-            white-space: nowrap;
+            font-size: 14px;
         }
 
         .main-nav a:hover {
+            background-color: rgba(35, 174, 115, 0.1);
             color: rgb(35, 174, 115);
         }
 
         .main-nav a.active {
+            background-color: rgba(35, 174, 115, 0.1);
             color: rgb(35, 174, 115);
-            border-bottom: 2px solid rgb(35, 174, 115);
+            font-weight: 500;
         }
 
         body {
@@ -134,23 +138,21 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.12);
         }
 
-        /* Secondary Navigation */
         .secondary-nav {
             display: flex;
-            background-color: #f8faff;
-            padding: 0 16px;
-            border-bottom: 1px solid #e5e7eb;
-            overflow-x: auto;
+            gap: 0;
+            background-color: #fff;
+            border-bottom: 1px solid #e9ecef;
+            padding: 0 24px;
         }
 
         .secondary-nav a {
-            padding: 16px;
-            color: #6B7280;
+            color: #495057;
             text-decoration: none;
+            padding: 16px 24px;
             font-size: 14px;
-            font-weight: 500;
             transition: all 0.2s ease;
-            white-space: nowrap;
+            position: relative;
         }
 
         .secondary-nav a:hover {
@@ -159,7 +161,17 @@
 
         .secondary-nav a.active {
             color: rgb(35, 174, 115);
-            border-bottom: 2px solid rgb(35, 174, 115);
+            font-weight: 500;
+        }
+
+        .secondary-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: rgb(35, 174, 115);
         }
 
         .content {
@@ -185,10 +197,10 @@
     </nav>
 
     <div class="container">
-        <nav class="secondary-nav">
+        <div class="secondary-nav">
             <a href="userseting.html">User Settings</a>
             <a href="globalsettings.html" class="active">Global Settings</a>
-        </nav>
+        </div>
 
         <div class="content">
             <div class="toggle-container">
