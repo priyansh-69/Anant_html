@@ -282,6 +282,191 @@
             border-radius: 4px;
             transition: all 0.2s ease;
         }
+
+        /* Search Type Toggle Styling */
+        .search-type-toggle {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #495057;
+            position: relative;
+        }
+
+        .toggle-btn.active {
+            color: rgb(35, 174, 115);
+            font-weight: 500;
+        }
+
+        .toggle-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -11px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgb(35, 174, 115);
+        }
+
+        /* Advanced Search Styling */
+        .search-type {
+            display: none;
+        }
+
+        .search-type.active {
+            display: block;
+        }
+
+        .match-type {
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .match-type label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 30px;
+            color: #495057;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .match-type label:hover {
+            background: rgba(35, 174, 115, 0.1);
+        }
+
+        .match-type input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            margin: 0;
+            accent-color: rgb(35, 174, 115);
+        }
+
+        .advanced-filter-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr auto auto;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+
+        .advanced-filter-row:hover {
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .advanced-filter-row select,
+        .advanced-filter-row input {
+            padding: 10px 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .advanced-filter-row select:hover,
+        .advanced-filter-row input:hover {
+            border-color: rgb(35, 174, 115);
+        }
+
+        .advanced-filter-row select:focus,
+        .advanced-filter-row input:focus {
+            border-color: rgb(35, 174, 115);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(35, 174, 115, 0.1);
+        }
+
+        .operator-type {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            color: #495057;
+            font-weight: 500;
+            text-align: center;
+            min-width: 60px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .operator-type.and {
+            background: rgba(35, 174, 115, 0.1);
+            border-color: rgb(35, 174, 115);
+            color: rgb(35, 174, 115);
+        }
+
+        .operator-type.or {
+            background: rgba(0, 123, 255, 0.1);
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        .remove-filter {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 1px solid #dc3545;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            color: #dc3545;
+            transition: all 0.2s ease;
+        }
+
+        .remove-filter:hover {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .add-filter-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #fff;
+            border: 2px solid rgb(35, 174, 115);
+            color: rgb(35, 174, 115);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-filter-btn:hover {
+            background: rgb(35, 174, 115);
+            color: #fff;
+        }
+
+        .add-filter-btn::before {
+            content: '+';
+            font-size: 18px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -303,6 +488,14 @@
         <!-- Search Section -->
         <div id="searchSection">
             <div class="search-container">
+                <!-- Search Type Toggle -->
+                <div class="search-type-toggle">
+                    <button class="toggle-btn active" data-type="basic">Basic</button>
+                    <button class="toggle-btn" data-type="advanced">Advanced</button>
+                </div>
+
+                <!-- Basic Search -->
+                <div id="basicSearch" class="search-type active">
                 <div class="filter-grid">
                     <div class="filter-item">
                         <label>Import Date</label>
@@ -321,10 +514,49 @@
                         <input type="text">
                     </div>
                 </div>
+                </div>
+
+                <!-- Advanced Search -->
+                <div id="advancedSearch" class="search-type">
+                    <div class="match-type">
+                        <label>
+                            <input type="radio" name="matchType" value="all" checked> Match all the following
+                        </label>
+                        <label>
+                            <input type="radio" name="matchType" value="any"> Match any of the following
+                        </label>
+                    </div>
+                    <div class="advanced-filters" id="advancedFilters">
+                        <div class="advanced-filter-row">
+                            <select class="field-name">
+                                <option value="">Select Field</option>
+                                <option value="importDate">Import Date</option>
+                                <option value="fileName">File Name</option>
+                                <option value="recordsCreated">Records Created</option>
+                                <option value="recordsUpdate">Records Update</option>
+                                <option value="recordsIgnored">Records Ignored</option>
+                                <option value="status">Status</option>
+                                <option value="updatedUsername">Updated Username</option>
+                                <option value="updatedTime">Updated Time</option>
+                            </select>
+                            <select class="operator">
+                                <option value="is">is</option>
+                                <option value="contains">contains</option>
+                                <option value="startsWith">starts with</option>
+                                <option value="endsWith">ends with</option>
+                            </select>
+                            <input type="text" class="filter-value" placeholder="Enter value...">
+                            <div class="operator-type">AND</div>
+                            <button class="remove-filter" onclick="removeFilterRow(this)" title="Remove filter">×</button>
+                        </div>
+                    </div>
+                    <button class="add-filter-btn" onclick="addAdvancedFilterRow()">+ Add Filter</button>
+                </div>
+
                 <div class="search-actions">
-                    <button onclick="performSearch()">Search</button>
+                    <button onclick="performSearch()">Generate</button>
                     <button onclick="resetFilters()">Clear</button>
-                    <button onclick="cancelSearch()">Cancel</button>
+                    <button onclick="cancelSearch()">Cancel Search</button>
                 </div>
             </div>
         </div>
@@ -369,167 +601,236 @@
                         <th>UPDATED TIME</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>28-Mar-2025 05:41 PM</td>
-                        <td>Leads.csv</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td class="success">Success</td>
-                        <td>TESTING</td>
-                        <td>28-Mar-2025 05:41 PM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>28-Mar-2025 03:07 PM</td>
-                        <td>Leads (2).csv</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="open">Open</td>
-                        <td>TESTING</td>
-                        <td>28-Mar-2025 03:07 PM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>28-Mar-2025 12:59 PM</td>
-                        <td>Leads (2).csv</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="open">Open</td>
-                        <td>TESTING</td>
-                        <td>28-Mar-2025 12:59 PM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>28-Mar-2025 12:27 PM</td>
-                        <td>samplelead.csv</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="open">Open</td>
-                        <td>TESTING</td>
-                        <td>28-Mar-2025 12:27 PM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>26-Mar-2025 02:57 PM</td>
-                        <td>Leads.csv</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="open">Open</td>
-                        <td>Subramanyam</td>
-                        <td>26-Mar-2025 02:57 PM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>26-Mar-2025 02:56 PM</td>
-                        <td>Leads.csv</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="open">Open</td>
-                        <td>Subramanyam</td>
-                        <td>26-Mar-2025 02:56 PM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>25-Mar-2025 09:42 AM</td>
-                        <td>organization.csv</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="open">Open</td>
-                        <td>Subramanyam</td>
-                        <td>25-Mar-2025 09:42 AM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>25-Mar-2025 09:22 AM</td>
-                        <td>lead.csv</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="open">Open</td>
-                        <td>Subramanyam</td>
-                        <td>25-Mar-2025 09:22 AM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>24-Mar-2025 07:25 PM</td>
-                        <td>leads_allColumnRecords_2025-03-24 (2).csv</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="open">Open</td>
-                        <td>TESTING</td>
-                        <td>24-Mar-2025 07:25 PM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>24-Mar-2025 06:46 PM</td>
-                        <td>leads_allColumnRecords_2025-03-24 (2).csv</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="open">Open</td>
-                        <td>TESTING</td>
-                        <td>24-Mar-2025 06:46 PM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>21-Feb-2025 05:01 PM</td>
-                        <td>shailaja.csv</td>
-                        <td>0</td>
-                        <td>43</td>
-                        <td>239</td>
-                        <td class="partial-failed">Partial Failed</td>
-                        <td>Subramanyam</td>
-                        <td>21-Feb-2025 05:01 PM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>13-Feb-2025 04:14 PM</td>
-                        <td>divya sample data.csv</td>
-                        <td>87</td>
-                        <td>0</td>
-                        <td>17</td>
-                        <td class="partial-failed">Partial Failed</td>
-                        <td>Subramanyam</td>
-                        <td>13-Feb-2025 04:14 PM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>12-Feb-2025 11:59 AM</td>
-                        <td>MArketing data by suresh &Naveen.csv</td>
-                        <td>901</td>
-                        <td>0</td>
-                        <td>855</td>
-                        <td class="partial-failed">Partial Failed</td>
-                        <td>Subramanyam</td>
-                        <td>12-Feb-2025 11:59 AM</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" class="checkbox"></td>
-                        <td>12-Feb-2025 11:55 AM</td>
-                        <td>MArketing data by suresh &Naveen.csv</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="open">Open</td>
-                        <td>Subramanyam</td>
-                        <td>12-Feb-2025 11:55 AM</td>
-                    </tr>
+                <tbody id="tableBody">
                 </tbody>
             </table>
         </div>
     </div>
 
     <script>
+        // Import log data array
+        const importLogData = [
+    {
+        importDate: "28-Mar-2025 05:41 PM",
+        fileName: "Leads.csv",
+        recordsCreated: "0",
+        recordsUpdate: "1",
+        recordsIgnored: "0",
+        status: "Success",
+        updatedUsername: "TESTING",
+        updatedTime: "28-Mar-2025 05:41 PM"
+    },
+    {
+        importDate: "28-Mar-2025 03:07 PM",
+        fileName: "Leads (2).csv",
+        recordsCreated: "",
+        recordsUpdate: "",
+        recordsIgnored: "",
+        status: "Open",
+        updatedUsername: "TESTING",
+        updatedTime: "28-Mar-2025 03:07 PM"
+    },
+    {
+        importDate: "28-Mar-2025 12:59 PM",
+        fileName: "Leads (2).csv",
+        recordsCreated: "",
+        recordsUpdate: "",
+        recordsIgnored: "",
+        status: "Open",
+        updatedUsername: "TESTING",
+        updatedTime: "28-Mar-2025 12:59 PM"
+    },
+    {
+        importDate: "28-Mar-2025 12:27 PM",
+        fileName: "samplelead.csv",
+        recordsCreated: "",
+        recordsUpdate: "",
+        recordsIgnored: "",
+        status: "Open",
+        updatedUsername: "TESTING",
+        updatedTime: "28-Mar-2025 12:27 PM"
+    },
+    {
+        importDate: "26-Mar-2025 02:57 PM",
+        fileName: "Leads.csv",
+        recordsCreated: "",
+        recordsUpdate: "",
+        recordsIgnored: "",
+        status: "Open",
+        updatedUsername: "Subramanyam",
+        updatedTime: "26-Mar-2025 02:57 PM"
+    },
+    {
+        importDate: "26-Mar-2025 02:56 PM",
+        fileName: "Leads.csv",
+        recordsCreated: "",
+        recordsUpdate: "",
+        recordsIgnored: "",
+        status: "Open",
+        updatedUsername: "Subramanyam",
+        updatedTime: "26-Mar-2025 02:56 PM"
+    },
+    {
+        importDate: "25-Mar-2025 09:42 AM",
+        fileName: "organization.csv",
+        recordsCreated: "",
+        recordsUpdate: "",
+        recordsIgnored: "",
+        status: "Open",
+        updatedUsername: "Subramanyam",
+        updatedTime: "25-Mar-2025 09:42 AM"
+    },
+    {
+        importDate: "25-Mar-2025 09:22 AM",
+        fileName: "lead.csv",
+        recordsCreated: "",
+        recordsUpdate: "",
+        recordsIgnored: "",
+        status: "Open",
+        updatedUsername: "Subramanyam",
+        updatedTime: "25-Mar-2025 09:22 AM"
+    },
+    {
+        importDate: "24-Mar-2025 07:25 PM",
+        fileName: "leads_allColumnRecords_2025-03-24 (2).csv",
+        recordsCreated: "",
+        recordsUpdate: "",
+        recordsIgnored: "",
+        status: "Open",
+        updatedUsername: "TESTING",
+        updatedTime: "24-Mar-2025 07:25 PM"
+    },
+    {
+        importDate: "24-Mar-2025 06:46 PM",
+        fileName: "leads_allColumnRecords_2025-03-24 (2).csv",
+        recordsCreated: "",
+        recordsUpdate: "",
+        recordsIgnored: "",
+        status: "Open",
+        updatedUsername: "TESTING",
+        updatedTime: "24-Mar-2025 06:46 PM"
+    },
+    {
+        importDate: "21-Feb-2025 05:01 PM",
+        fileName: "shailaja.csv",
+        recordsCreated: "0",
+        recordsUpdate: "43",
+        recordsIgnored: "239",
+        status: "Partial Failed",
+        updatedUsername: "Subramanyam",
+        updatedTime: "21-Feb-2025 05:01 PM"
+    },
+    {
+        importDate: "13-Feb-2025 04:14 PM",
+        fileName: "divya sample data.csv",
+        recordsCreated: "87",
+        recordsUpdate: "0",
+        recordsIgnored: "17",
+        status: "Partial Failed",
+        updatedUsername: "Subramanyam",
+        updatedTime: "13-Feb-2025 04:14 PM"
+    },
+    {
+        importDate: "12-Feb-2025 11:59 AM",
+        fileName: "MArketing data by suresh &Naveen.csv",
+        recordsCreated: "901",
+        recordsUpdate: "0",
+        recordsIgnored: "855",
+        status: "Partial Failed",
+        updatedUsername: "Subramanyam",
+        updatedTime: "12-Feb-2025 11:59 AM"
+    },
+    {
+        importDate: "12-Feb-2025 11:55 AM",
+        fileName: "MArketing data by suresh &Naveen.csv",
+        recordsCreated: "",
+        recordsUpdate: "",
+        recordsIgnored: "",
+        status: "Open",
+        updatedUsername: "Subramanyam",
+        updatedTime: "12-Feb-2025 11:55 AM"
+    },
+    {
+        importDate: "01-Feb-2025 10:15 AM",
+        fileName: "testdata.csv",
+        recordsCreated: "300",
+        recordsUpdate: "50",
+        recordsIgnored: "0",
+        status: "Success",
+        updatedUsername: "Admin",
+        updatedTime: "01-Feb-2025 10:15 AM"
+    },
+    {
+        importDate: "01-Feb-2025 09:30 AM",
+        fileName: "testfile.csv",
+        recordsCreated: "150",
+        recordsUpdate: "200",
+        recordsIgnored: "50",
+        status: "Partial Failed",
+        updatedUsername: "Admin",
+        updatedTime: "01-Feb-2025 09:30 AM"
+    },
+    {
+        importDate: "31-Jan-2025 04:20 PM",
+        fileName: "examplefile.csv",
+        recordsCreated: "400",
+        recordsUpdate: "0",
+        recordsIgnored: "0",
+        status: "Success",
+        updatedUsername: "Manager",
+        updatedTime: "31-Jan-2025 04:20 PM"
+    },
+    {
+        importDate: "30-Jan-2025 02:45 PM",
+        fileName: "customerdata.csv",
+        recordsCreated: "100",
+        recordsUpdate: "0",
+        recordsIgnored: "50",
+        status: "Success",
+        updatedUsername: "Employee",
+        updatedTime: "30-Jan-2025 02:45 PM"
+    },
+    {
+        importDate: "30-Jan-2025 02:30 PM",
+        fileName: "new_leads.csv",
+        recordsCreated: "50",
+        recordsUpdate: "10",
+        recordsIgnored: "5",
+        status: "Partial Failed",
+        updatedUsername: "Admin",
+        updatedTime: "30-Jan-2025 02:30 PM"
+    },
+    {
+        importDate: "29-Jan-2025 11:10 AM",
+        fileName: "leads_data.csv",
+        recordsCreated: "600",
+        recordsUpdate: "100",
+        recordsIgnored: "50",
+        status: "Success",
+        updatedUsername: "Admin",
+        updatedTime: "29-Jan-2025 11:10 AM"
+    }
+];
+
+
+        // Function to render table data
+        function renderTableData(data) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = data.map(item => `
+                <tr>
+                    <td><input type="checkbox" class="checkbox"></td>
+                    <td>${item.importDate}</td>
+                    <td>${item.fileName}</td>
+                    <td>${item.recordsCreated}</td>
+                    <td>${item.recordsUpdate}</td>
+                    <td>${item.recordsIgnored}</td>
+                    <td class="${item.status.toLowerCase().replace(' ', '-')}">${item.status}</td>
+                    <td>${item.updatedUsername}</td>
+                    <td>${item.updatedTime}</td>
+                </tr>
+            `).join('');
+        }
+
         // Show search section with animation
         function showSearch() {
             const searchSection = document.getElementById('searchSection');
@@ -553,83 +854,302 @@
             const inputs = document.querySelectorAll('.filter-item input');
             inputs.forEach(input => input.value = '');
             
-            const rows = document.querySelectorAll('table tbody tr');
-            rows.forEach(row => row.style.display = '');
+            // Reset table to show all data
+            renderTableData(importLogData);
         }
 
-        // Cancel search
+        // Cancel search and return to initial state
         function cancelSearch() {
-            resetFilters();
+            // Hide search section
             document.getElementById('searchSection').style.display = 'none';
+            
+            // Show search button
             document.getElementById('searchBtn').style.display = 'block';
+
+            // Reset table to show all data
+            renderTableData(importLogData);
+            
+            // Reset pagination info
+            updatePaginationInfo();
+
+            // Force page reload to ensure clean state
+            window.location = window.location.href.split('?')[0];
         }
 
-        // Perform search with improved filtering
-        function performSearch() {
-            const filterItems = document.querySelectorAll('.filter-item');
-            const rows = document.querySelectorAll('table tbody tr');
+        // Function to toggle between basic and advanced search
+        function initializeSearchToggle() {
+            const toggleBtns = document.querySelectorAll('.toggle-btn');
+            const searchTypes = document.querySelectorAll('.search-type');
+
+            toggleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons and search types
+                    toggleBtns.forEach(b => b.classList.remove('active'));
+                    searchTypes.forEach(s => s.classList.remove('active'));
+
+                    // Add active class to clicked button and corresponding search type
+                    btn.classList.add('active');
+                    const type = btn.dataset.type;
+                    document.getElementById(`${type}Search`).classList.add('active');
+
+                    // Reset filters when switching
+                    resetFilters();
+                });
+            });
+
+            // Add event listener for match type radio buttons
+            const matchTypeRadios = document.querySelectorAll('input[name="matchType"]');
+            matchTypeRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    updateOperatorVisibility();
+                });
+            });
+        }
+
+        // Function to add new filter row with improved UI
+        function addAdvancedFilterRow() {
+            const filterRow = document.createElement('div');
+            filterRow.className = 'advanced-filter-row';
+            filterRow.innerHTML = `
+                <select class="field-name">
+                    <option value="">Select Field</option>
+                    <option value="importDate">Import Date</option>
+                    <option value="fileName">File Name</option>
+                    <option value="recordsCreated">Records Created</option>
+                    <option value="recordsUpdate">Records Update</option>
+                    <option value="recordsIgnored">Records Ignored</option>
+                    <option value="status">Status</option>
+                    <option value="updatedUsername">Updated Username</option>
+                    <option value="updatedTime">Updated Time</option>
+                </select>
+                <select class="operator">
+                    <option value="is">is</option>
+                    <option value="contains">contains</option>
+                    <option value="startsWith">starts with</option>
+                    <option value="endsWith">ends with</option>
+                </select>
+                <input type="text" class="filter-value" placeholder="Enter value...">
+                <div class="operator-type">AND</div>
+                <button class="remove-filter" onclick="removeFilterRow(this)" title="Remove filter">×</button>
+            `;
+            document.getElementById('advancedFilters').appendChild(filterRow);
+            updateOperatorVisibility();
+
+            // Add event listeners for real-time search
+            const inputs = filterRow.querySelectorAll('select, input');
+            inputs.forEach(input => {
+                input.addEventListener('change', performSearch);
+                input.addEventListener('input', debounce(performSearch, 300));
+            });
+        }
+
+        // Function to remove filter row
+        function removeFilterRow(button) {
+            button.closest('.advanced-filter-row').remove();
+            updateOperatorVisibility();
+        }
+
+        // Function to update operator type and visibility
+        function updateOperatorVisibility() {
+            const matchType = document.querySelector('input[name="matchType"]:checked').value;
+            const rows = document.querySelectorAll('.advanced-filter-row');
+            const operatorText = matchType === 'all' ? 'AND' : 'OR';
+            const operatorClass = matchType === 'all' ? 'and' : 'or';
             
-            rows.forEach(row => {
-                let showRow = true;
-                filterItems.forEach(item => {
-                    const input = item.querySelector('input');
-                    const value = input.value.trim().toLowerCase();
-                    if (value) {
-                        const label = item.querySelector('label').textContent.trim();
-                        const cellIndex = Array.from(row.parentElement.parentElement.querySelector('thead tr').cells)
-                            .findIndex(cell => cell.textContent.includes(label.toUpperCase()));
-                        
-                        if (cellIndex > -1) {
-                            const cellValue = row.cells[cellIndex].textContent.toLowerCase();
-                            
-                            // Handle date inputs specially
-                            if (input.type === 'date') {
-                                const searchDate = new Date(value);
-                                const cellDate = new Date(cellValue);
-                                if (searchDate.toDateString() !== cellDate.toDateString()) {
-                                    showRow = false;
-                                }
-                            } else {
-                                // For text inputs, use includes for partial matches
-                                if (!cellValue.includes(value)) {
-                                    showRow = false;
+            rows.forEach((row, index) => {
+                const operator = row.querySelector('.operator-type');
+                if (operator) {
+                    operator.textContent = operatorText;
+                    operator.className = 'operator-type ' + operatorClass;
+                    operator.style.display = index === rows.length - 1 ? 'none' : 'block';
+                }
+            });
+        }
+
+        // Enhanced performSearch function with improved data handling
+        function performSearch() {
+            const isAdvancedSearch = document.getElementById('advancedSearch').classList.contains('active');
+            let filteredData = [...importLogData];
+
+            if (isAdvancedSearch) {
+                const matchType = document.querySelector('input[name="matchType"]:checked').value;
+                const filterRows = document.querySelectorAll('.advanced-filter-row');
+                const activeFilters = Array.from(filterRows).filter(row => {
+                    const field = row.querySelector('.field-name').value;
+                    const value = row.querySelector('.filter-value').value;
+                    return field && value;
+                });
+
+                if (activeFilters.length > 0) {
+                    filteredData = filteredData.filter(item => {
+                        const filterResults = activeFilters.map(row => {
+                            const field = row.querySelector('.field-name').value;
+                            const operator = row.querySelector('.operator').value;
+                            const value = row.querySelector('.filter-value').value.toLowerCase();
+                            let itemValue = String(item[field] || '').toLowerCase();
+
+                            // Special handling for numeric fields
+                            if (['recordsCreated', 'recordsUpdate', 'recordsIgnored'].includes(field)) {
+                                const numValue = parseInt(value);
+                                const numItemValue = parseInt(itemValue);
+                                if (!isNaN(numValue) && !isNaN(numItemValue)) {
+                                    return numItemValue === numValue;
                                 }
                             }
+
+                            // Special handling for date fields
+                            if (field === 'importDate' || field === 'updatedTime') {
+                                const itemDate = itemValue.split(' ')[0]; // Get only the date part
+                                const searchDate = formatDateForFilter(value);
+                                return itemDate.toLowerCase().includes(searchDate.toLowerCase());
+                            }
+
+                            switch (operator) {
+                                case 'is':
+                                    return itemValue === value;
+                                case 'contains':
+                                    return itemValue.includes(value);
+                                case 'startsWith':
+                                    return itemValue.startsWith(value);
+                                case 'endsWith':
+                                    return itemValue.endsWith(value);
+                                default:
+                                    return false;
+                            }
+                        });
+
+                        return matchType === 'all'
+                            ? filterResults.every(result => result)  // AND - all conditions must be true
+                            : filterResults.some(result => result);  // OR - at least one condition must be true
+                    });
+                }
+            } else {
+                // Basic search logic with improved field handling
+                const filterItems = document.querySelectorAll('#basicSearch .filter-item');
+                const filters = {};
+                
+                filterItems.forEach(item => {
+                    const input = item.querySelector('input');
+                    const label = item.querySelector('label').textContent.trim().toLowerCase();
+                    const value = input.value.trim();
+                    if (value) {
+                        const fieldMap = {
+                            'import date': 'importDate',
+                            'file name': 'fileName',
+                            'status': 'status',
+                            'updated username': 'updatedUsername'
+                        };
+                        const fieldName = fieldMap[label];
+                        if (fieldName) {
+                            filters[fieldName] = value;
                         }
                     }
                 });
-                row.style.display = showRow ? '' : 'none';
-            });
 
-            // Update the pagination info after search
+                if (Object.keys(filters).length > 0) {
+                    filteredData = filteredData.filter(item => {
+                        return Object.entries(filters).every(([field, value]) => {
+                            let itemValue = String(item[field] || '').toLowerCase();
+                            let searchValue = value.toLowerCase();
+
+                            // Special handling for date fields
+                            if (field === 'importDate') {
+                                const itemDate = itemValue.split(' ')[0]; // Get only the date part
+                                const searchDate = formatDateForFilter(value);
+                                return itemDate.toLowerCase().includes(searchDate.toLowerCase());
+                            }
+
+                            // For other fields, use includes for partial matching
+                            return itemValue.includes(searchValue);
+                        });
+                    });
+                }
+            }
+
+            renderTableData(filteredData);
             updatePaginationInfo();
         }
 
-        // Add new function to update pagination info
+        // Improved date formatting function
+        function formatDateForFilter(dateString) {
+            if (!dateString) return '';
+            
+            // Try to parse the date string
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return dateString;
+            
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            
+            return `${day}-${month}-${year}`;
+        }
+
+        // Updated function to handle date input changes
+        function addSearchListeners() {
+            const inputs = document.querySelectorAll('.filter-item input, .advanced-filter-row input');
+            inputs.forEach(input => {
+                if (input.type === 'date') {
+                    input.addEventListener('change', (e) => {
+                        const formattedDate = formatDateForFilter(e.target.value);
+                        input.setAttribute('data-formatted-value', formattedDate);
+                    });
+                }
+            });
+        }
+
+        // Updated pagination info function
         function updatePaginationInfo() {
-            const visibleRows = document.querySelectorAll('table tbody tr:not([style*="display: none"])');
-            const totalRows = document.querySelectorAll('table tbody tr').length;
+            const visibleRows = document.querySelectorAll('table tbody tr');
+            const totalRows = importLogData.length;
             const paginationInfo = document.querySelector('.pagination-info');
             
             if (paginationInfo) {
-                paginationInfo.textContent = `${visibleRows.length} / ${totalRows}`;
+                const start = visibleRows.length > 0 ? 1 : 0;
+                const end = visibleRows.length;
+                paginationInfo.textContent = `${start} - ${end} / ${totalRows}`;
             }
         }
 
-        // Add event listeners for real-time search
+        // Initialize everything on page load with state preservation
         document.addEventListener('DOMContentLoaded', function() {
-            const inputs = document.querySelectorAll('.filter-item input');
-            inputs.forEach(input => {
-                input.addEventListener('input', performSearch);
-            });
+            // Initialize table with all data
+            renderTableData(importLogData);
+            updatePaginationInfo();
+            addSearchListeners();
+            initializeSearchToggle();
+
+            // Remove any existing event listeners to prevent duplicates
+            const generateBtn = document.querySelector('.search-actions button:first-child');
+            const addFilterBtn = document.querySelector('.add-filter-btn');
+            const recordsSelect = document.querySelector('.records-select');
+            const cancelBtn = document.querySelector('.search-actions button:last-child');
+
+            // Clean up existing listeners
+            generateBtn?.removeEventListener('click', performSearch);
+            addFilterBtn?.removeEventListener('click', addAdvancedFilterRow);
+            cancelBtn?.removeEventListener('click', cancelSearch);
+
+            // Add fresh event listeners
+            generateBtn?.addEventListener('click', performSearch);
+            addFilterBtn?.addEventListener('click', addAdvancedFilterRow);
+            cancelBtn?.addEventListener('click', cancelSearch);
 
             // Add event listener for records per page
-            const recordsSelect = document.querySelector('.records-select');
             if (recordsSelect) {
                 recordsSelect.addEventListener('change', function() {
-                    // Implement pagination logic here
-                    console.log('Records per page changed to:', this.value);
+                    const perPage = parseInt(this.value);
+                    // Implementation for pagination will go here
+                    console.log('Records per page changed to:', perPage);
                 });
+            }
+
+            // Check if we're returning from a search cancellation
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('fromSearch') === 'true') {
+                // Clear the URL parameter without refreshing the page
+                window.history.replaceState({}, '', 'import-log.html');
             }
         });
     </script>

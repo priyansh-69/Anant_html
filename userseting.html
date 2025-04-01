@@ -869,7 +869,6 @@
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <!-- Table rows will be dynamically inserted here -->
                     </tbody>
                 </table>
             </div>
@@ -877,87 +876,307 @@
     </div>
 
 <script>
-    // Table data array
+    // User data array
     const userData = [
-        {
-            lastCallSyncTime: '2024-03-28 14:30:00',
-            callLogSyncStatus: 'Synced',
-            callRecordingStatus: 'Enabled',
-            currentAppVersion: '2.1.0'
+    {
+        callTracking: '',
+        recording: 'Disabled',
+        leadCapture: '',
+        errorLog: '',
+        syncStatus: '',
+        sim: '1. Jio True5G, 918309986026 (Disabled)',
+        lastSync: '24-Mar-2025 08:05 PM',
+        deviceDetails: 'Android, Xiaomi, 2311DRA48I, 15',
+        deviceId: '981a209de7b6d4f',
+        appVersion: '',
+        permissions: {
+            list: [
+                'WRITE_EXTERNAL_STORAGE -> NOT_REQUESTED',
+                'READ_EXTERNAL_STORAGE -> NOT_REQUESTED',
+                'POST_NOTIFICATIONS -> NOT_REQUESTED',
+                'READ_CONTACTS -> GRANTED',
+                'READ_CALL_LOG -> GRANTED',
+                'READ_PHONE_STATE -> GRANTED',
+                'READ_PHONE_NUMBERS -> GRANTED',
+                'CALL_PHONE -> GRANTED',
+                'ACCESS_FINE_LOCATION -> NOT_REQUESTED',
+                'ACCESS_FINE_LOCATION -> DENIED',
+                'CAMERA -> NOT_REQUESTED'
+            ],
+            details: [
+                'Call Recording access - Not provided',
+                'Contacts access - Provided, Mobile Dialer - Provided'
+            ]
         },
-        {
-            lastCallSyncTime: '2024-03-28 13:15:00',
-            callLogSyncStatus: 'Pending',
-            callRecordingStatus: 'Disabled',
-            currentAppVersion: '2.0.5'
+        imeiRestriction: '',
+        permissionDetails: '',
+        userName: 'Rahul Sharma'
+    },
+    {
+        callTracking: '',
+        recording: 'Enabled',
+        leadCapture: '',
+        errorLog: '',
+        syncStatus: '',
+        sim: '1. Airtel, 918703180608 (Enabled)',
+        lastSync: '26-Mar-2025 06:05 PM',
+        deviceDetails: 'Android, Samsung, SM-E135F, 14',
+        deviceId: '93e82461917b02',
+        appVersion: '25.01.01',
+        permissions: {
+            list: [
+                'WRITE_EXTERNAL_STORAGE -> NOT_REQUESTED',
+                'READ_EXTERNAL_STORAGE -> NOT_REQUESTED',
+                'POST_NOTIFICATIONS -> NOT_REQUESTED',
+                'READ_CONTACTS -> GRANTED',
+                'READ_CALL_LOG -> GRANTED',
+                'READ_PHONE_STATE -> GRANTED',
+                'READ_PHONE_NUMBERS -> GRANTED',
+                'CALL_PHONE -> GRANTED',
+                'ACCESS_FINE_LOCATION -> NOT_REQUESTED',
+                'ACCESS_FINE_LOCATION -> DENIED',
+                'CAMERA -> NOT_REQUESTED'
+            ],
+            details: [
+                'Call Recording access - Not provided',
+                'Contacts access - Provided, Mobile Dialer - Provided, Charitha D',
+                'Location access - Not provided, Camera - Not provided'
+            ]
         },
-        {
-            lastCallSyncTime: '2024-03-27 16:45:00',
-            callLogSyncStatus: 'Failed',
-            callRecordingStatus: 'Enabled',
-            currentAppVersion: '2.1.0'
+        imeiRestriction: '',
+        permissionDetails: '',
+        userName: 'Amit Verma'
+    },
+    {
+        callTracking: 'Active',
+        recording: 'Enabled',
+        leadCapture: 'Yes',
+        errorLog: 'No issues detected',
+        syncStatus: 'Successful',
+        sim: '2. Vi, 917002345678 (Enabled)',
+        lastSync: '27-Mar-2025 10:15 AM',
+        deviceDetails: 'iOS, iPhone 14, iOS 17',
+        deviceId: '6a12bc34de78fg90',
+        appVersion: '17.3.1',
+        permissions: {
+            list: [
+                'WRITE_EXTERNAL_STORAGE -> NOT_REQUESTED',
+                'READ_EXTERNAL_STORAGE -> GRANTED',
+                'POST_NOTIFICATIONS -> GRANTED',
+                'READ_CONTACTS -> GRANTED',
+                'READ_CALL_LOG -> DENIED',
+                'READ_PHONE_STATE -> GRANTED',
+                'READ_PHONE_NUMBERS -> GRANTED',
+                'CALL_PHONE -> GRANTED',
+                'ACCESS_FINE_LOCATION -> GRANTED',
+                'CAMERA -> GRANTED'
+            ],
+            details: [
+                'Call Recording access - Provided',
+                'Contacts access - Provided, Mobile Dialer - Provided',
+                'Location access - Provided, Camera - Provided'
+            ]
         },
-        {
-            lastCallSyncTime: '2024-03-28 09:20:00',
-            callLogSyncStatus: 'Synced',
-            callRecordingStatus: 'Enabled',
-            currentAppVersion: '2.0.8'
+        imeiRestriction: '',
+        permissionDetails: '',
+        userName: 'Sneha Gupta'
+    },
+    {
+        callTracking: '',
+        recording: 'Disabled',
+        leadCapture: '',
+        errorLog: 'Network Error',
+        syncStatus: 'Pending',
+        sim: '1. Jio, 918345678912 (Disabled)',
+        lastSync: '22-Mar-2025 03:45 PM',
+        deviceDetails: 'Android, OnePlus, NE2211, 13',
+        deviceId: 'abcd1234efgh5678',
+        appVersion: '14.0.2',
+        permissions: {
+            list: [
+                'WRITE_EXTERNAL_STORAGE -> GRANTED',
+                'READ_EXTERNAL_STORAGE -> GRANTED',
+                'POST_NOTIFICATIONS -> GRANTED',
+                'READ_CONTACTS -> DENIED',
+                'READ_CALL_LOG -> DENIED',
+                'READ_PHONE_STATE -> GRANTED',
+                'READ_PHONE_NUMBERS -> GRANTED',
+                'CALL_PHONE -> GRANTED',
+                'ACCESS_FINE_LOCATION -> DENIED',
+                'CAMERA -> GRANTED'
+            ],
+            details: [
+                'Call Recording access - Not provided',
+                'Contacts access - Not provided',
+                'Location access - Not provided, Camera - Provided'
+            ]
         },
-        {
-            lastCallSyncTime: '2024-03-28 11:00:00',
-            callLogSyncStatus: 'Synced',
-            callRecordingStatus: 'Disabled',
-            currentAppVersion: '2.1.0'
-        }
-    ];
-
-    // Function to get status class
-    function getStatusClass(status) {
-        switch(status) {
-            case 'Synced':
-                return 'success';
-            case 'Pending':
-                return 'partial-failed';
-            case 'Failed':
-                return 'failed';
-            default:
-                return '';
-        }
+        imeiRestriction: '',
+        permissionDetails: '',
+        userName: 'Neeraj Kumar'
+    },
+    {
+        callTracking: '',
+        recording: 'Enabled',
+        leadCapture: '',
+        errorLog: '',
+        syncStatus: 'Successful',
+        sim: '1. BSNL, 919876543210 (Enabled)',
+        lastSync: '28-Mar-2025 07:30 AM',
+        deviceDetails: 'Android, Realme, RMX3085, 12',
+        deviceId: 'zyxw9876vuts5432',
+        appVersion: '12.5.6',
+        permissions: {
+            list: [
+                'WRITE_EXTERNAL_STORAGE -> NOT_REQUESTED',
+                'READ_EXTERNAL_STORAGE -> NOT_REQUESTED',
+                'POST_NOTIFICATIONS -> GRANTED',
+                'READ_CONTACTS -> GRANTED',
+                'READ_CALL_LOG -> GRANTED',
+                'READ_PHONE_STATE -> GRANTED',
+                'READ_PHONE_NUMBERS -> GRANTED',
+                'CALL_PHONE -> GRANTED',
+                'ACCESS_FINE_LOCATION -> NOT_REQUESTED',
+                'CAMERA -> GRANTED'
+            ],
+            details: [
+                'Call Recording access - Provided',
+                'Contacts access - Provided, Mobile Dialer - Provided',
+                'Location access - Not provided, Camera - Provided'
+            ]
+        },
+        imeiRestriction: '',
+        permissionDetails: '',
+        userName: 'Karthik Iyer'
     }
+];
 
-    // Function to render table rows
-    function renderTableRows(data) {
+
+    // Optimized search utilities
+    const searchUtils = {
+        normalizeValue: value => String(value || '').toLowerCase().trim(),
+        
+        compareValues: (value, searchTerm, operator = 'contains') => {
+            if (!value && !searchTerm) return true;
+            if (!value && searchTerm) return false;
+            
+            value = searchUtils.normalizeValue(value);
+            searchTerm = searchUtils.normalizeValue(searchTerm);
+            
+            switch(operator) {
+                case 'is': return value === searchTerm;
+                case 'is not': return value !== searchTerm;
+                case 'begins with': return value.startsWith(searchTerm);
+                case 'ends with': return value.endsWith(searchTerm);
+                case 'contains': return value.includes(searchTerm);
+                case 'not contains': return !value.includes(searchTerm);
+                case 'is empty': return !value;
+                case 'is not empty': return !!value;
+                default: return true;
+            }
+        },
+
+        compareDates: (dateStr1, dateStr2) => {
+            if (!dateStr1 || !dateStr2) return true;
+            try {
+                const parseDate = (dateStr) => {
+                    if (dateStr.includes('-')) {
+                        return new Date(dateStr.replace(/(\d{2})-(\w{3})-(\d{4})/, '$2 $1, $3'));
+                    }
+                    return new Date(dateStr);
+                };
+
+                const date1 = parseDate(dateStr1);
+                const date2 = parseDate(dateStr2);
+
+                if (isNaN(date1.getTime()) || isNaN(date2.getTime())) {
+                    console.error('Invalid date format');
+                    return false;
+                }
+
+                return date1.toDateString() === date2.toDateString();
+            } catch (e) {
+                console.error('Date comparison error:', e);
+                return false;
+            }
+        }
+    };
+
+    // Function to render table
+    function renderTable() {
         const tableBody = document.getElementById('tableBody');
-        tableBody.innerHTML = data.map(item => `
-            <tr>
-                <td><input type="checkbox" class="checkbox"></td>
-                <td>${item.lastCallSyncTime}</td>
-                <td class="${getStatusClass(item.callLogSyncStatus)}">${item.callLogSyncStatus}</td>
-                <td>${item.callRecordingStatus}</td>
-                <td>${item.currentAppVersion}</td>
-                <td>
-                    <button class="action-btn">Edit</button>
-                    <button class="action-btn">Delete</button>
+        tableBody.innerHTML = '';
+
+        userData.forEach(user => {
+            const {
+                callTracking,
+                recording,
+                leadCapture,
+                errorLog,
+                syncStatus,
+                sim,
+                lastSync,
+                deviceDetails,
+                deviceId,
+                appVersion,
+                permissions,
+                imeiRestriction,
+                permissionDetails,
+                userName
+            } = user;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="checkbox"></td>
+                <td>${callTracking}</td>
+                <td>${recording}</td>
+                <td>${leadCapture}</td>
+                <td>${errorLog}</td>
+                <td>${syncStatus}</td>
+                <td>${sim}</td>
+                <td>${lastSync}</td>
+                <td>${deviceDetails}</td>
+                <td>${deviceId}</td>
+                <td>${appVersion}</td>
+                <td class="permissions">
+                    <ul>
+                        ${permissions.list.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                    ${permissions.details.map(detail => `<p>${detail}</p>`).join('')}
                 </td>
-            </tr>
-        `).join('');
+                <td>${imeiRestriction}</td>
+                <td>${permissionDetails}</td>
+                <td>${userName}</td>
+            `;
+            tableBody.appendChild(row);
+        });
     }
 
-    // Show search section with animation
+    // Show search section
     function showSearch() {
-        const searchSection = document.getElementById('searchSection');
-        const searchBtn = document.getElementById('searchBtn');
-        
-        searchSection.style.display = 'block';
-        searchBtn.style.display = 'none';
-        
-        // Clear any existing filters
-        resetFilters();
-        
-        // Focus on first input
-        const firstInput = document.querySelector('.filter-item input');
-        if (firstInput) {
-            firstInput.focus();
+        document.getElementById('searchSection').style.display = 'block';
+        document.getElementById('searchBtn').style.display = 'none';
+        document.getElementById('basicSearch').style.display = 'block';
+        document.getElementById('advancedSearch').style.display = 'none';
+    }
+
+    // Toggle between basic and advanced search
+    function toggleSearchType(type) {
+        const basicBtn = document.getElementById('basicSearchBtn');
+        const advancedBtn = document.getElementById('advancedSearchBtn');
+        const basicSearch = document.getElementById('basicSearch');
+        const advancedSearch = document.getElementById('advancedSearch');
+
+        if (type === 'basic') {
+            basicBtn.classList.add('active');
+            advancedBtn.classList.remove('active');
+            basicSearch.style.display = 'block';
+            advancedSearch.style.display = 'none';
+        } else {
+            basicBtn.classList.remove('active');
+            advancedBtn.classList.add('active');
+            basicSearch.style.display = 'none';
+            advancedSearch.style.display = 'block';
         }
     }
 
@@ -977,75 +1196,341 @@
         document.getElementById('searchBtn').style.display = 'block';
     }
 
-    // Perform search with improved filtering
-    function performSearch() {
-        const filterItems = document.querySelectorAll('.filter-item');
-        const filteredData = userData.filter(item => {
-            let matches = true;
-            filterItems.forEach(filterItem => {
-                const input = filterItem.querySelector('input');
-                const value = input.value.trim().toLowerCase();
-                if (value) {
-                    const label = filterItem.querySelector('label').textContent.trim();
-                    let itemValue = '';
-                    
-                    // Map label to data property
-                    switch(label) {
-                        case 'Last Call Sync Time':
-                            itemValue = item.lastCallSyncTime.toLowerCase();
-                            break;
-                        case 'Call Log Sync Status':
-                            itemValue = item.callLogSyncStatus.toLowerCase();
-                            break;
-                        case 'Call Recording Status':
-                            itemValue = item.callRecordingStatus.toLowerCase();
-                            break;
-                        case 'Current App Version':
-                            itemValue = item.currentAppVersion.toLowerCase();
-                            break;
-                    }
-                    
-                    if (!itemValue.includes(value)) {
-                        matches = false;
-                    }
+    // Add a new row in Advanced Search
+    function addRow() {
+        const rowsContainer = document.getElementById('rowsContainer');
+        const newRow = rowsContainer.firstElementChild.cloneNode(true);
+        newRow.querySelector('.input-box').value = '';
+        rowsContainer.appendChild(newRow);
+    }
+
+    // Remove the last row in Advanced Search
+    function removeRow() {
+        const rowsContainer = document.getElementById('rowsContainer');
+        if (rowsContainer.children.length > 1) {
+            rowsContainer.removeChild(rowsContainer.lastElementChild);
+        }
+    }
+
+    // Optimized Basic Search
+    function filterTableBasic() {
+        const getInputValue = (label) => {
+            const input = document.querySelector(`input[placeholder="${label}"]`);
+            return input ? input.value.toLowerCase().trim() : '';
+        };
+
+        const fieldMap = {
+            'Don\'t Allow Users to Disable Call Tracking': 'callTracking',
+            'Don\'t Allow Users to Disable Recording': 'recording',
+            'Capture a Lead from an Incoming Call': 'leadCapture',
+            'Enable Error Log': 'errorLog',
+            'Call Log Sync Status': 'syncStatus',
+            'Call Recording Status': 'recordingStatus',
+            'Force IMEI Restriction': 'imeiRestriction',
+            'User Name': 'userName',
+            'Last Sync Time': 'lastSync',
+            'Current App Version': 'appVersion'
+        };
+
+        const searchCriteria = {};
+        
+        document.querySelectorAll('.filter-item').forEach(item => {
+            const label = item.querySelector('label').textContent.trim();
+            const input = item.querySelector('input');
+            if (input && fieldMap[label]) {
+                searchCriteria[fieldMap[label]] = input.value.toLowerCase().trim();
+            }
+        });
+
+        const filteredData = userData.filter(user => {
+            return Object.entries(searchCriteria).every(([key, value]) => {
+                if (!value) return true;
+                
+                if (key === 'lastSync' && value) {
+                    return searchUtils.compareDates(user[key], value);
                 }
+                
+                return searchUtils.compareValues(user[key], value);
             });
-            return matches;
         });
-        
-        renderTableRows(filteredData);
-        updatePaginationInfo();
+
+        renderFilteredTable(filteredData);
     }
 
-    // Add new function to update pagination info
-    function updatePaginationInfo() {
-        const visibleRows = document.querySelectorAll('table tbody tr:not([style*="display: none"])');
-        const totalRows = userData.length;
-        const paginationInfo = document.querySelector('.pagination-info');
+    // Optimized Advanced Search
+    function filterTableAdvanced() {
+        const matchType = document.querySelector('input[name="matchType"]:checked').value;
         
-        if (paginationInfo) {
-            paginationInfo.textContent = `${visibleRows.length} / ${totalRows}`;
+        // Update condition prefixes based on match type
+        document.querySelectorAll('.condition-prefix').forEach(select => {
+            select.value = matchType === 'all' ? 'AND' : 'OR';
+            select.disabled = true;
+        });
+
+        // Map the field names exactly as they appear in the table headers to userData properties
+        const fieldMap = {
+            'Don\'t Allow Users to Disable Call Tracking': 'callTracking',
+            'Don\'t Allow Users to Disable Recording': 'recording',
+            'Capture a Lead from an Incoming Call': 'leadCapture',
+            'Enable Error Log': 'errorLog',
+            'Call Log Sync Status': 'syncStatus',
+            'SIM': 'sim',
+            'Last Sync Time': 'lastSync',
+            'Device Details': 'deviceDetails',
+            'Device ID': 'deviceId',
+            'Current App Version': 'appVersion',
+            'Allowed Permissions': 'permissions',
+            'Force IMEI Restriction': 'imeiRestriction',
+            'Permission Details': 'permissionDetails',
+            'User Name': 'userName'
+        };
+
+        // Get all conditions from the UI
+        const conditions = Array.from(document.querySelectorAll('.condition-row')).map(row => {
+            const fieldSelect = row.querySelector('.field-select');
+            const operatorSelect = row.querySelector('.operator-select');
+            const valueInput = row.querySelector('.value-input');
+            
+            return {
+                field: fieldMap[fieldSelect.value] || fieldSelect.value,
+                operator: operatorSelect.value,
+                value: valueInput.value.trim()
+            };
+        }).filter(condition => condition.value !== ''); // Only consider non-empty conditions
+
+        // Filter the userData based on conditions
+        const filteredData = userData.filter(user => {
+            const results = conditions.map(({ field, operator, value }) => {
+                // Special handling for permissions
+                if (field === 'permissions') {
+                    const permissionText = [
+                        ...user.permissions.list,
+                        ...user.permissions.details
+                    ].join(' ').toLowerCase();
+                    return searchUtils.compareValues(permissionText, value, operator);
+                }
+
+                // Special handling for dates
+                if (field === 'lastSync') {
+                    return searchUtils.compareDates(user[field], value);
+                }
+
+                // Get the actual value from user data
+                const userValue = user[field];
+                
+                // Debug log to check values
+                console.log(`Comparing field: ${field}, userValue: ${userValue}, searchValue: ${value}, operator: ${operator}`);
+                
+                return searchUtils.compareValues(userValue, value, operator);
+            });
+
+            // Apply AND/OR logic based on matchType
+            return matchType === 'all' 
+                ? results.every(Boolean)  // AND condition
+                : results.some(Boolean);  // OR condition
+        });
+
+        console.log('Filtered Data:', filteredData); // Debug log
+        renderFilteredTable(filteredData);
+    }
+
+    // Update match type handler
+    function handleMatchTypeChange(event) {
+        const matchType = event.target.value;
+        const prefixSelects = document.querySelectorAll('.condition-prefix');
+        const value = matchType === 'all' ? 'AND' : 'OR';
+        
+        prefixSelects.forEach(select => {
+            select.value = value;
+            select.disabled = true;
+        });
+    }
+
+    // Add event listener for match type radio buttons
+    document.querySelectorAll('input[name="matchType"]').forEach(radio => {
+        radio.addEventListener('change', handleMatchTypeChange);
+    });
+
+    // Update addConditionRow function to ensure proper event binding
+    function addConditionRow() {
+        const container = document.getElementById('conditionsContainer');
+        const rows = container.getElementsByClassName('condition-row');
+        const firstRow = rows[0];
+        
+        const newRow = firstRow.cloneNode(true);
+        
+        // Clear input value
+        newRow.querySelector('.value-input').value = '';
+        
+        // Set condition prefix based on current match type
+        const matchType = document.querySelector('input[name="matchType"]:checked').value;
+        const prefixSelect = newRow.querySelector('.condition-prefix');
+        prefixSelect.value = matchType === 'all' ? 'AND' : 'OR';
+        prefixSelect.disabled = true;
+        
+        // Show delete button
+        const deleteBtn = newRow.querySelector('.delete-btn');
+        deleteBtn.style.display = 'block';
+        
+        container.appendChild(newRow);
+        
+        // Update delete buttons visibility
+        if (rows.length > 0) {
+            Array.from(rows).forEach(row => {
+                row.querySelector('.delete-btn').style.display = 'block';
+            });
         }
-    }
-
-    // Initialize table on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        renderTableRows(userData);
         
-        // Add event listeners for real-time search
-        const inputs = document.querySelectorAll('.filter-item input');
+        if (rows.length === 1) {
+            rows[0].querySelector('.delete-btn').style.display = 'none';
+        }
+
+        // Add event listeners to new row's inputs
+        const inputs = newRow.querySelectorAll('select, input');
         inputs.forEach(input => {
-            input.addEventListener('input', performSearch);
+            input.addEventListener('change', () => {
+                console.log('Input changed, filtering...'); // Debug log
+                filterTableAdvanced();
+            });
+        });
+    }
+
+    // Delete condition row
+    function deleteConditionRow(button) {
+        const container = document.getElementById('conditionsContainer');
+        const rows = container.getElementsByClassName('condition-row');
+        
+        if (rows.length === 1) {
+            return;
+        }
+        
+        const row = button.closest('.condition-row');
+        row.remove();
+        
+        if (rows.length === 1) {
+            rows[0].querySelector('.delete-btn').style.display = 'none';
+        }
+    }
+
+    // Add input event listeners for real-time search
+    document.querySelectorAll('.filter-item input').forEach(input => {
+        input.addEventListener('input', debounce(() => {
+            if (document.getElementById('basicSearch').style.display !== 'none') {
+                filterTableBasic();
+            }
+        }, 300));
+    });
+
+    // Utility function for debouncing
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Optimized render function
+    function renderFilteredTable(filteredData) {
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '';
+
+        if (filteredData.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="15" style="text-align: center;">No matching records found</td></tr>';
+            return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        filteredData.forEach(user => {
+            const {
+                callTracking,
+                recording,
+                leadCapture,
+                errorLog,
+                syncStatus,
+                sim,
+                lastSync,
+                deviceDetails,
+                deviceId,
+                appVersion,
+                permissions: { list: permissionsList, details: permissionsDetails },
+                imeiRestriction,
+                permissionDetails,
+                userName
+            } = user;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="checkbox"></td>
+                <td>${callTracking}</td>
+                <td>${recording}</td>
+                <td>${leadCapture}</td>
+                <td>${errorLog}</td>
+                <td>${syncStatus}</td>
+                <td>${sim}</td>
+                <td>${lastSync}</td>
+                <td>${deviceDetails}</td>
+                <td>${deviceId}</td>
+                <td>${appVersion}</td>
+                <td class="permissions">
+                    <ul>${permissionsList.map(item => `<li>${item}</li>`).join('')}</ul>
+                    ${permissionsDetails.map(detail => `<p>${detail}</p>`).join('')}
+                </td>
+                <td>${imeiRestriction}</td>
+                <td>${permissionDetails}</td>
+                <td>${userName}</td>
+            `;
+            fragment.appendChild(row);
         });
 
-        // Add event listener for records per page
-        const recordsSelect = document.querySelector('.records-select');
-        if (recordsSelect) {
-            recordsSelect.addEventListener('change', function() {
-                // Implement pagination logic here
-                console.log('Records per page changed to:', this.value);
+        tableBody.appendChild(fragment);
+    }
+
+    // Optimized event listeners
+    const searchActions = {
+        search: () => {
+            const isAdvancedSearch = document.getElementById('advancedSearch').style.display !== 'none';
+            isAdvancedSearch ? filterTableAdvanced() : filterTableBasic();
+        },
+        clear: () => {
+            document.querySelectorAll('input[type="text"], input[type="date"], .value-input').forEach(input => {
+                input.value = '';
             });
+            renderTable();
+        },
+        cancel: () => {
+            document.getElementById('searchSection').style.display = 'none';
+            document.getElementById('searchBtn').style.display = 'block';
+            document.querySelectorAll('input[type="text"], input[type="date"], .value-input').forEach(input => {
+                input.value = '';
+            });
+            renderTable();
         }
+    };
+
+    // Attach event listeners
+    document.querySelector('.search-actions').addEventListener('click', (e) => {
+        const action = e.target.textContent.toLowerCase();
+        if (searchActions[action]) {
+            searchActions[action]();
+        }
+    });
+
+    // Initial render
+    renderTable();
+
+    // Add real-time search for advanced search inputs
+    document.querySelectorAll('.condition-row select, .condition-row input').forEach(input => {
+        input.addEventListener('change', debounce(() => {
+            if (document.getElementById('advancedSearch').style.display !== 'none') {
+                filterTableAdvanced();
+            }
+        }, 300));
     });
 </script>
 </body>
