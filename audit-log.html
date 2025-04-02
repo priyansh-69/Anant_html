@@ -442,115 +442,93 @@
           </div>
 
           <!-- Basic Search -->
-          <div id="basicSearch" style="margin-top: 20px">
-            <div class="filter-grid">
-              <div class="filter-item">
-                <label>User Name</label>
-                <input type="text" placeholder="Enter user name" />
-              </div>
-              <div class="filter-item">
-                <label>Action Type</label>
-                <select>
-                  <option value="">Select Action</option>
-                  <option value="create">Create</option>
-                  <option value="update">Update</option>
-                  <option value="delete">Delete</option>
-                  <option value="view">View</option>
-                  <option value="export">Export</option>
-                  <option value="import">Import</option>
-                </select>
-              </div>
-              <div class="filter-item">
-                <label>Module</label>
-                <select>
-                  <option value="">Select Module</option>
-                  <option value="users">Users</option>
-                  <option value="settings">Settings</option>
-                  <option value="permissions">Permissions</option>
-                  <option value="fields">Fields</option>
-                  <option value="reports">Reports</option>
-                  <option value="audit">Audit</option>
-                </select>
-              </div>
-              <div class="filter-item">
-                <label>Start Date</label>
-                <input type="datetime-local" />
-              </div>
-              <div class="filter-item">
-                <label>End Date</label>
-                <input type="datetime-local" />
-              </div>
-              <div class="filter-item">
-                <label>IP Address</label>
-                <input type="text" placeholder="Enter IP address" />
-              </div>
-              <div class="filter-item">
-                <label>Description</label>
-                <input type="text" placeholder="Enter description keywords" />
-              </div>
-            </div>
-          </div>
-
+     <!-- Basic Search -->
+<div id="basicSearch" style="margin-top: 20px">
+  <div class="filter-grid">
+    <div class="filter-item">
+      <label>User</label>
+      <input type="text" id="userFilter"/>
+    </div>
+    <div class="filter-item">
+      <label>Screen Name</label>
+      <input type="text" id="screenNameFilter"/>
+    </div>
+    <div class="filter-item">
+      <label>Activity</label>
+      <input type="text" id="activityFilter"/>
+    </div>
+    <div class="filter-item">
+      <label>Device</label>
+      <input type="text" id="deviceFilter"/>
+    </div>
+    <div class="filter-item">
+      <label>Performed At</label>
+      <input type="date" id="performedAtFilter"/>
+    </div>
+    <div class="filter-item">
+      <label>Location</label>
+      <input type="text" id="locationFilter"/>
+    </div>
+  </div>
+</div>
           <!-- Advanced Search -->
-          <div class="rule-form" id="advancedSearch" style="display: none">
-            <div class="match-options">
-              <label class="radio-label">
-                <input type="radio" name="matchType" value="all" checked />
-                <span>Match all conditions (AND)</span>
-              </label>
-              <label class="radio-label">
-                <input type="radio" name="matchType" value="any" />
-                <span>Match any condition (OR)</span>
-              </label>
-            </div>
+           <div id="advancedSearch">
+            <div class="content-container">
 
-            <div class="conditions-container" id="conditionsContainer">
-              <div class="condition-row">
-                <select class="condition-prefix" style="width: 70px">
-                  <option value="AND">AND</option>
-                  <option value="OR">OR</option>
-                </select>
-                <select class="field-select">
-                  <option value="username">User Name</option>
-                  <option value="action">Action Type</option>
-                  <option value="module">Module</option>
-                  <option value="date">Date</option>
-                  <option value="ip">IP Address</option>
-                  <option value="description">Description</option>
-                  <option value="device">Device</option>
-                  <option value="location">Location</option>
-                </select>
-                <select class="operator-select">
-                  <option value="equals">equals</option>
-                  <option value="not_equals">does not equal</option>
-                  <option value="contains">contains</option>
-                  <option value="not_contains">does not contain</option>
-                  <option value="starts_with">starts with</option>
-                  <option value="ends_with">ends with</option>
-                  <option value="greater_than">greater than</option>
-                  <option value="less_than">less than</option>
-                  <option value="between">between</option>
-                  <option value="in">in</option>
-                  <option value="not_in">not in</option>
-                </select>
-                <input
-                  type="text"
-                  class="value-input"
-                  placeholder="Enter value"
-                />
-                <button class="more-btn" onclick="addConditionRow()">
-                  Add Condition
-                </button>
-                <button
-                  class="delete-btn"
-                  onclick="deleteConditionRow(this)"
-                  style="display: none"
-                >
-                  ✕
-                </button>
+           
+    
+              <!-- Visible by default condition builder -->
+              <div class="rule-form" id="ruleForm">
+                  <div class="match-options">
+                      <label class="radio-label">
+                          <input type="radio" name="matchType" value="all" checked>
+                          <span>Match all the following</span>
+                      </label>
+                      <label class="radio-label">
+                          <input type="radio" name="matchType" value="any">
+                          <span>Match any of the following</span>
+                      </label>
+                  </div>
+      
+                  <div class="conditions-container" id="conditionsContainer">
+                      <div class="condition-row">
+                          <select class="condition-prefix" style="width: 70px; padding: 8px; border: 1px solid #e2e8f0; border-radius: 4px; background-color: white; color: #374151; font-size: 14px;">
+                              <option value="AND">AND</option>
+                              <option value="OR">OR</option>
+                          </select>
+                          <select class="field-select">
+                            <option>User</option>
+                            <option>Screen Name</option>
+                            <option>Activity</option>
+                            <option>Device</option>
+                            <option>Performed At</option>
+                            <option>Location</option>
+                          </select>
+                          
+                          <select class="operator-select">
+                            <option value="is">is</option>
+                            <option value="contains">contains</option>
+                            <option value="starts_with">starts with</option>
+                            <option value="ends_with">ends with</option>
+                            <option value="before">before</option>
+                            <option value="after">after</option>
+                          </select>
+                          <input type="text" class="value-input" placeholder="Enter value">
+                          <button class="more-btn">▼ More</button>
+                      </div>
+                  </div>
+      
+                 
+      
+                
               </div>
-            </div>
+      
+              <!-- Simplified results display -->
+        
           </div>
+            
+           </div>
+    
 
           <!-- Action Buttons Section -->
           <div class="search-actions">
@@ -614,12 +592,13 @@
           <table>
             <thead>
               <tr>
-                <th>Date & Time</th>
+                <th>Performed At</th>
                 <th>User</th>
-                <th>Action</th>
-                <th>Module</th>
-                <th>Description</th>
-                <th>IP Address</th>
+                <th>Activity</th>
+                <th>Screen Name</th>
+                <th>Details</th>
+                <th>Device</th>
+                <th>Location</th>
               </tr>
             </thead>
             <tbody id="auditLogTableBody">
@@ -857,100 +836,180 @@
         }
       }
 
-      function performBasicSearch() {
-        const filters = {};
-        document
-          .querySelectorAll("#basicSearch .filter-item")
-          .forEach((item) => {
-            const input = item.querySelector("input, select");
-            if (input && input.value) {
-              const label = item.querySelector("label").textContent.trim().toLowerCase();
-              filters[label] = input.value.toLowerCase();
-            }
-          });
-
-        // Filter table rows based on the filters
-        const rows = document.querySelectorAll(".table-section table tbody tr");
-        rows.forEach((row) => {
-          let showRow = true;
-          const cells = row.querySelectorAll("td");
-
-          Object.entries(filters).forEach(([label, value]) => {
-            const cellIndex = getColumnIndex(label);
-            if (cellIndex !== -1) {
-              const cellText = cells[cellIndex].textContent.toLowerCase();
-              if (!cellText.includes(value)) {
-                showRow = false;
-              }
-            }
-          });
-
-          row.style.display = showRow ? "" : "none";
-        });
-      }
 
       function performAdvancedSearch() {
-        const matchType = document.querySelector(
-          'input[name="matchType"]:checked'
-        ).value;
-        const conditions = [];
+    const matchType = document.querySelector('input[name="matchType"]:checked').value;
+    const conditions = [];
 
-        document.querySelectorAll(".condition-row").forEach((row) => {
-          const condition = {
-            prefix: row.querySelector(".condition-prefix").value,
+    // Collect all conditions from the form
+    document.querySelectorAll(".condition-row").forEach(row => {
+        const condition = {
             field: row.querySelector(".field-select").value,
             operator: row.querySelector(".operator-select").value,
-            value: row.querySelector(".value-input").value,
-          };
-          conditions.push(condition);
+            value: row.querySelector(".value-input").value
+        };
+        if (condition.value) conditions.push(condition);
+    });
+
+    if (conditions.length === 0) {
+        // If no conditions, show all data
+        filteredData = [...auditLogData];
+    } else {
+        // Filter data based on conditions
+        filteredData = auditLogData.filter(log => {
+            const results = conditions.map(condition => {
+                const logValue = getAdvancedSearchLogValue(log, condition.field).toString().toLowerCase();
+                const conditionValue = condition.value.toString().toLowerCase();
+                
+                switch(condition.operator) {
+                    case 'is': 
+                        return logValue === conditionValue;
+                    case 'contains':
+                        return logValue.includes(conditionValue);
+                    case 'starts_with':
+                        return logValue.startsWith(conditionValue);
+                    case 'ends_with':
+                        return logValue.endsWith(conditionValue);
+                    case 'before':
+                        return compareDates(log, condition.field, condition.value, 'before');
+                    case 'after':
+                        return compareDates(log, condition.field, condition.value, 'after');
+                    default:
+                        return false;
+                }
+            });
+            
+            return matchType === 'all' ? results.every(Boolean) : results.some(Boolean);
         });
+    }
 
-        // Filter table based on conditions
-        const rows = document.querySelectorAll(".table-section table tbody tr");
-        rows.forEach((row) => {
-          const cells = row.querySelectorAll("td");
-          let showRow = matchType === "all";
+    currentPage = 1;
+    populateAuditLogTable();
+}
 
-          conditions.forEach((condition) => {
-            const cellIndex = getColumnIndexByField(condition.field);
-            if (cellIndex !== -1) {
-              const cellValue = cells[cellIndex].textContent.toLowerCase();
-              const conditionValue = condition.value.toLowerCase();
-              let matches = false;
+function getAdvancedSearchLogValue(log, field) {
+    switch(field) {
+        case 'User': return log.User;
+        case 'Screen Name': return log.ScreenName;
+        case 'Activity': return log.Activity;
+        case 'Device': return log.Device;
+        case 'Performed At': return log.Performedat;
+        case 'Location': return log.Location;
+        default: return '';
+    }
+}
 
-              switch (condition.operator) {
-                case "equals":
-                  matches = cellValue === conditionValue;
-                  break;
-                case "not_equals":
-                  matches = cellValue !== conditionValue;
-                  break;
-                case "contains":
-                  matches = cellValue.includes(conditionValue);
-                  break;
-                case "not_contains":
-                  matches = !cellValue.includes(conditionValue);
-                  break;
-                case "starts_with":
-                  matches = cellValue.startsWith(conditionValue);
-                  break;
-                case "ends_with":
-                  matches = cellValue.endsWith(conditionValue);
-                  break;
-                // Add more operators as needed
-              }
 
-              if (matchType === "all") {
-                showRow = showRow && matches;
-              } else {
-                showRow = showRow || matches;
-              }
-            }
-          });
 
-          row.style.display = showRow ? "" : "none";
+
+// Format date for comparison (dd-mmm-yyyy to yyyy-mm-dd)
+function formatDateForComparison(dateString) {
+    if (!dateString.includes('-')) return dateString;
+    
+    const parts = dateString.split('-');
+    if (parts.length !== 3) return dateString;
+    
+    const months = {
+        'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
+        'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+        'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+    };
+    
+    const day = parts[0].padStart(2, '0');
+    const month = months[parts[1]] || '01';
+    const year = parts[2];
+    
+    return `${year}-${month}-${day}`;
+}
+
+function addConditionRow() {
+    const container = document.getElementById("conditionsContainer");
+    const firstRow = container.querySelector(".condition-row");
+    
+    const newRow = firstRow.cloneNode(true);
+    newRow.querySelector(".value-input").value = "";
+    
+    // Set the prefix based on current match type
+    const matchType = document.querySelector('input[name="matchType"]:checked').value;
+    const prefixSelect = newRow.querySelector(".condition-prefix");
+    prefixSelect.value = matchType === 'all' ? 'AND' : 'OR';
+    
+    container.appendChild(newRow);
+    
+    // Update delete button visibility
+    updateConditionRowButtons();
+}
+// Function to add new condition row
+function addConditionRow() {
+    const container = document.getElementById("conditionsContainer");
+    const firstRow = container.querySelector(".condition-row");
+    
+    const newRow = firstRow.cloneNode(true);
+    newRow.querySelector(".value-input").value = "";
+    
+    // Set the prefix based on current match type
+    const matchType = document.querySelector('input[name="matchType"]:checked').value;
+    const prefixSelect = newRow.querySelector(".condition-prefix");
+    prefixSelect.value = matchType === 'all' ? 'AND' : 'OR';
+    
+    container.appendChild(newRow);
+    
+    // Update delete button visibility
+    updateConditionRowButtons();
+}
+
+// Function to remove condition row
+function deleteConditionRow(button) {
+    const container = document.getElementById("conditionsContainer");
+    const rows = container.querySelectorAll(".condition-row");
+    
+    if (rows.length <= 1) return; // Don't remove the last row
+    
+    button.closest(".condition-row").remove();
+    updateConditionRowButtons();
+}
+
+// Update condition row buttons visibility
+function updateConditionRowButtons() {
+    const rows = document.querySelectorAll(".condition-row");
+    rows.forEach((row, index) => {
+        const deleteBtn = row.querySelector(".delete-btn");
+        if (deleteBtn) {
+            deleteBtn.style.display = rows.length > 1 ? "block" : "none";
+        }
+    });
+}
+
+// Update operator options based on field selection
+document.addEventListener("change", function(e) {
+    if (e.target.classList.contains("field-select")) {
+        const operatorSelect = e.target.closest(".condition-row").querySelector(".operator-select");
+        const field = e.target.value;
+        
+        operatorSelect.innerHTML = '';
+        
+        // Common operators for all fields
+        const commonOperators = [
+            {value: "is", text: "is"},
+            {value: "contains", text: "contains"},
+            {value: "starts_with", text: "starts with"},
+            {value: "ends_with", text: "ends with"}
+        ];
+        
+        // Additional operators for date fields
+        if (field === "Performed At") {
+            commonOperators.push(
+                {value: "before", text: "before"},
+                {value: "after", text: "after"}
+            );
+        }
+        
+        // Add operators to select
+        commonOperators.forEach(op => {
+            operatorSelect.add(new Option(op.text, op.value));
         });
-      }
+    }
+});
 
       function getColumnIndex(label) {
         const headers = document.querySelectorAll(".table-section table th");
@@ -1023,126 +1082,144 @@
 
       // Audit log data array
       const auditLogData = [
-        {
-          dateTime: "2024-03-26 14:30:45",
-          user: "admin",
-          action: "Update",
-          module: "User Settings",
-          description: "Modified user permissions for mobile app",
-          ipAddress: "192.168.1.100"
-        },
-        {
-          dateTime: "2024-03-26 14:45:10",
-          user: "jane_doe",
-          action: "Login",
-          module: "Dashboard",
-          description: "User logged in successfully",
-          ipAddress: "192.168.1.101"
-        },
-        {
-          dateTime: "2024-03-26 14:50:33",
-          user: "admin",
-          action: "Delete",
-          module: "User Management",
-          description: "Deleted inactive user account",
-          ipAddress: "192.168.1.100"
-        },
-        {
-          dateTime: "2024-03-26 15:02:17",
-          user: "mike_smith",
-          action: "Update",
-          module: "Profile",
-          description: "Changed email address",
-          ipAddress: "192.168.1.102"
-        },
-        {
-          dateTime: "2024-03-26 15:15:29",
-          user: "admin",
-          action: "Create",
-          module: "New Role",
-          description: "Added new role: Editor",
-          ipAddress: "192.168.1.100"
-        },
-        {
-          dateTime: "2024-03-26 15:25:55",
-          user: "susan_w",
-          action: "Update",
-          module: "Billing",
-          description: "Updated credit card details",
-          ipAddress: "192.168.1.103"
-        },
-        {
-          dateTime: "2024-03-26 15:37:42",
-          user: "john_doe",
-          action: "Logout",
-          module: "Dashboard",
-          description: "User logged out",
-          ipAddress: "192.168.1.101"
-        },
-        {
-          dateTime: "2024-03-26 15:50:18",
-          user: "admin",
-          action: "Update",
-          module: "System Config",
-          description: "Changed password policy settings",
-          ipAddress: "192.168.1.100"
-        },
-        {
-          dateTime: "2024-03-26 16:05:11",
-          user: "alice_b",
-          action: "Login",
-          module: "Dashboard",
-          description: "User logged in successfully",
-          ipAddress: "192.168.1.104"
-        },
-        {
-          dateTime: "2024-03-26 16:12:37",
-          user: "admin",
-          action: "Create",
-          module: "API Key",
-          description: "Generated a new API key for third-party integration",
-          ipAddress: "192.168.1.100"
-        },
-        {
-          dateTime: "2024-03-26 16:20:49",
-          user: "bob_k",
-          action: "Failed Login",
-          module: "Dashboard",
-          description: "Incorrect password entered",
-          ipAddress: "192.168.1.105"
-        },
-        {
-          dateTime: "2024-03-26 16:32:15",
-          user: "admin",
-          action: "Update",
-          module: "Security",
-          description: "Enabled two-factor authentication",
-          ipAddress: "192.168.1.100"
-        },
-        {
-          dateTime: "2024-03-26 16:45:50",
-          user: "jane_doe",
-          action: "Update",
-          module: "Profile",
-          description: "Uploaded new profile picture",
-          ipAddress: "192.168.1.101"
-        },
-        {
-          dateTime: "2024-03-26 17:00:23",
-          user: "admin",
-          action: "Revoke",
-          module: "API Key",
-          description: "Revoked expired API key",
-          ipAddress: "192.168.1.100"
-        },
-        {
-          dateTime: "2024-03-26 17:12:09",
-          user: "alice_b",
-          action: "Logout",
-          module: "Dashboard",
-          description: "User logged out",
-          ipAddress: "192.168.1.104"
-        }
+      
+  {
+    User: "Indhu",
+    ScreenName: "Leads",
+    Activity: "Updated",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:20 PM",
+    Location: ", 25.01.01,Android,14,RMX3933,realme,62f92ff45915913b"
+  },
+  {
+    User: "Charitha.D",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:20 PM",
+    Location: ", 25.01.01,Android,14,SM-E135F,samsung,93e82d48191c79b2"
+  },
+  {
+    User: "Indhu",
+    ScreenName: "Leads",
+    Activity: "Updated",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:20 PM",
+    Location: ", 25.01.01,Android,14,RMX3933,realme,62f92ff45915913b"
+  },
+  {
+    User: "P.TEJAVATHI",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:19 PM",
+    Location: ", 25.01.01,Android,12,220733SI,Xiaomi,bb0e94f28ffd75d7"
+  },
+  {
+    User: "Lavanya",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:19 PM",
+    Location: ", 25.01.01,Android,14,RMX3933,realme,d6f8c1cffa3d8569"
+  },
+  {
+    User: "Indhu",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:19 PM",
+    Location: ", 25.01.01,Android,14,RMX3933,realme,62f92ff45915913b"
+  },
+  {
+    User: "P.TEJAVATHI",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:18 PM",
+    Location: ", 25.01.01,Android,12,220733SI,Xiaomi,bb0e94f28ffd75d7"
+  },
+  {
+    User: "Indhu",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:16 PM",
+    Location: ", 25.01.01,Android,14,RMX3933,realme,62f92ff45915913b"
+  },
+  {
+    User: "Charitha.D",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:14 PM",
+    Location: ", 25.01.01,Android,14,SM-E135F,samsung,93e82d48191c79b2"
+  },
+  {
+    User: "Indhu",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:14 PM",
+    Location: ", 25.01.01,Android,14,RMX3933,realme,62f92ff45915913b"
+  },
+  {
+    User: "Indhu",
+    ScreenName: "Leads",
+    Activity: "Updated",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:13 PM",
+    Location: ", 25.01.01,Android,14,RMX3933,realme,62f92ff45915913b"
+  },
+  {
+    User: "Charitha.D",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:13 PM",
+    Location: ", 25.01.01,Android,14,SM-E135F,samsung,93e82d48191c79b2"
+  },
+  {
+    User: "Indhu",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:12 PM",
+    Location: ", 25.01.01,Android,14,RMX3933,realme,62f92ff45915913b"
+  },
+  {
+    User: "P.TEJAVATHI",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 03:12 PM",
+    Location: ", 25.01.01,Android,12,220733SI,Xiaomi,bb0e94f28ffd75d7"
+  },
+ {
+    User: "Charitha.D",
+    ScreenName: "Leads",
+    Activity: "Created",
+    Details: "",
+    Device: "Mobile",
+    Performedat: "02-Apr-2025 01:35 PM",
+    Location: ", 25.01.01,Android,14,SM-E135F,samsung,93e82d48191c79b2"
+  },
+ 
+
       ];
 
       let filteredData = [...auditLogData];
@@ -1151,28 +1228,29 @@
 
       // Function to populate the table with filtered data
       function populateAuditLogTable(data = filteredData) {
-        const tableBody = document.getElementById('auditLogTableBody');
-        tableBody.innerHTML = ''; // Clear existing rows
-        
-        const startIndex = (currentPage - 1) * recordsPerPage;
-        const endIndex = startIndex + recordsPerPage;
-        const paginatedData = data.slice(startIndex, endIndex);
-        
-        paginatedData.forEach(log => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${log.dateTime}</td>
-            <td>${log.user}</td>
-            <td>${log.action}</td>
-            <td>${log.module}</td>
-            <td>${log.description}</td>
-            <td>${log.ipAddress}</td>
-          `;
-          tableBody.appendChild(row);
-        });
+  const tableBody = document.getElementById('auditLogTableBody');
+  tableBody.innerHTML = '';
+  
+  const startIndex = (currentPage - 1) * recordsPerPage;
+  const endIndex = startIndex + recordsPerPage;
+  const paginatedData = data.slice(startIndex, endIndex);
+  
+  paginatedData.forEach(log => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${log.Performedat}</td>
+      <td>${log.User}</td>
+      <td>${log.Activity}</td>
+      <td>${log.ScreenName}</td>
+      <td>${log.Details}</td>
+      <td>${log.Device}</td>
+      <td>${log.Location}</td>
+    `;
+    tableBody.appendChild(row);
+  });
 
-        updatePaginationInfo(data.length);
-      }
+  updatePaginationInfo(data.length);
+}
 
       // Update pagination information
       function updatePaginationInfo(totalRecords) {
@@ -1216,94 +1294,103 @@
 
       // Basic Search Implementation
       function performBasicSearch() {
-        const filters = {};
-        document.querySelectorAll("#basicSearch .filter-item").forEach(item => {
-          const input = item.querySelector("input, select");
-          if (input && input.value) {
-            const label = item.querySelector("label").textContent.trim().toLowerCase();
-            filters[label] = input.value.toLowerCase();
-          }
-        });
+  // Get all filter values
+  const userFilter = document.getElementById('userFilter').value.toLowerCase();
+  const screenNameFilter = document.getElementById('screenNameFilter').value.toLowerCase();
+  const activityFilter = document.getElementById('activityFilter').value.toLowerCase();
+  const deviceFilter = document.getElementById('deviceFilter').value.toLowerCase();
+  const performedAtFilter = document.getElementById('performedAtFilter').value;
+  const locationFilter = document.getElementById('locationFilter').value.toLowerCase();
 
-        filteredData = auditLogData.filter(log => {
-          return Object.entries(filters).every(([key, value]) => {
-            switch(key) {
-              case 'user name':
-                return log.user.toLowerCase().includes(value);
-              case 'action type':
-                return log.action.toLowerCase() === value;
-              case 'module':
-                return log.module.toLowerCase() === value;
-              case 'start date':
-                return new Date(log.dateTime) >= new Date(value);
-              case 'end date':
-                return new Date(log.dateTime) <= new Date(value);
-              case 'ip address':
-                return log.ipAddress.toLowerCase().includes(value);
-              case 'description':
-                return log.description.toLowerCase().includes(value);
-              default:
-                return true;
-            }
-          });
-        });
-
-        currentPage = 1;
-        populateAuditLogTable();
+  // Filter the data
+  filteredData = auditLogData.filter(log => {
+    // Date comparison
+    if (performedAtFilter) {
+      const logDate = new Date(log.Performedat.split(' ')[0].split('-').reverse().join('-'));
+      const filterDate = new Date(performedAtFilter);
+      if (logDate.toDateString() !== filterDate.toDateString()) {
+        return false;
       }
+    }
+
+    // Text field comparisons (case insensitive)
+    if (userFilter && !log.User.toLowerCase().includes(userFilter)) {
+      return false;
+    }
+    if (screenNameFilter && !log.ScreenName.toLowerCase().includes(screenNameFilter)) {
+      return false;
+    }
+    if (activityFilter && !log.Activity.toLowerCase().includes(activityFilter)) {
+      return false;
+    }
+    if (deviceFilter && !log.Device.toLowerCase().includes(deviceFilter)) {
+      return false;
+    }
+    if (locationFilter && !log.Location.toLowerCase().includes(locationFilter)) {
+      return false;
+    }
+
+    return true;
+  });
+
+  currentPage = 1;
+  populateAuditLogTable();
+}
 
       // Advanced Search Implementation
       function performAdvancedSearch() {
-        const matchType = document.querySelector('input[name="matchType"]:checked').value;
-        const conditions = [];
+  const matchType = document.querySelector('input[name="matchType"]:checked').value;
+  const conditions = [];
 
-        document.querySelectorAll(".condition-row").forEach(row => {
-          const condition = {
-            prefix: row.querySelector(".condition-prefix").value,
-            field: row.querySelector(".field-select").value,
-            operator: row.querySelector(".operator-select").value,
-            value: row.querySelector(".value-input").value.toLowerCase()
-          };
-          if (condition.value) {
-            conditions.push(condition);
-          }
-        });
+  document.querySelectorAll(".condition-row").forEach(row => {
+    const condition = {
+      field: row.querySelector(".field-select").value,
+      operator: row.querySelector(".operator-select").value,
+      value: row.querySelector(".value-input").value.toLowerCase()
+    };
+    if (condition.value) conditions.push(condition);
+  });
 
-        filteredData = auditLogData.filter(log => {
-          const results = conditions.map(condition => {
-            const value = getLogValue(log, condition.field).toLowerCase();
-            const conditionValue = condition.value;
-
-            switch (condition.operator) {
-              case 'equals':
-                return value === conditionValue;
-              case 'not_equals':
-                return value !== conditionValue;
-              case 'contains':
-                return value.includes(conditionValue);
-              case 'not_contains':
-                return !value.includes(conditionValue);
-              case 'starts_with':
-                return value.startsWith(conditionValue);
-              case 'ends_with':
-                return value.endsWith(conditionValue);
-              case 'greater_than':
-                return new Date(value) > new Date(conditionValue);
-              case 'less_than':
-                return new Date(value) < new Date(conditionValue);
-              default:
-                return true;
-            }
-          });
-
-          return matchType === 'all' 
-            ? results.every(result => result)
-            : results.some(result => result);
-        });
-
-        currentPage = 1;
-        populateAuditLogTable();
+  filteredData = auditLogData.filter(log => {
+    const matches = conditions.map(condition => {
+      const logValue = getLogValue(log, condition.field).toLowerCase();
+      
+      switch(condition.operator) {
+        case 'is': 
+          return logValue === condition.value;
+        case 'contains':
+          return logValue.includes(condition.value);
+        case 'starts_with':
+          return logValue.startsWith(condition.value);
+        case 'ends_with':
+          return logValue.endsWith(condition.value);
+        case 'before':
+          return new Date(log.Performedat) < new Date(condition.value);
+        case 'after':
+          return new Date(log.Performedat) > new Date(condition.value);
+        default:
+          return true;
       }
+    });
+    
+    return matchType === 'all' ? matches.every(Boolean) : matches.some(Boolean);
+  });
+
+  currentPage = 1;
+  populateAuditLogTable();
+}
+
+function getLogValue(log, field) {
+  switch(field) {
+    case 'User': return log.User;
+    case 'Screen Name': return log.ScreenName;
+    case 'Activity': return log.Activity;
+    case 'Device': return log.Device;
+    case 'Performed At': return log.Performedat;
+    case 'Location': return log.Location;
+    default: return '';
+  }
+}
 
       function getLogValue(log, field) {
         switch(field) {
@@ -1326,27 +1413,100 @@
 
       // Reset filters
       function resetFilters() {
-        const inputs = document.querySelectorAll(".filter-item input, .filter-item select, .input-box, .value-input");
-        inputs.forEach(input => {
-          if (input.type === "select-one") {
-            input.selectedIndex = 0;
-          } else {
-            input.value = "";
-          }
-        });
+  // Clear all filter inputs
+  document.getElementById('userFilter').value = '';
+  document.getElementById('screenNameFilter').value = '';
+  document.getElementById('activityFilter').value = '';
+  document.getElementById('deviceFilter').value = '';
+  document.getElementById('performedAtFilter').value = '';
+  document.getElementById('locationFilter').value = '';
 
-        filteredData = [...auditLogData];
-        currentPage = 1;
-        populateAuditLogTable();
+  // Reset to full dataset
+  filteredData = [...auditLogData];
+  currentPage = 1;
+  populateAuditLogTable();
 
-        document.getElementById("searchSection").style.display = "none";
-        document.getElementById("searchBtn").style.display = "block";
-      }
-
+  // Hide search section if needed
+  document.getElementById("searchSection").style.display = "none";
+  document.getElementById("searchBtn").style.display = "block";
+}
       // Initialize the table when the page loads
       document.addEventListener('DOMContentLoaded', () => {
         populateAuditLogTable();
       });
-    </script>
+
+
+
+      
+
+          // Simplified version keeping only core logic
+          document.addEventListener('click', function(e) {
+              // Condition row management
+              if (e.target.classList.contains('more-btn')) {
+                  addConditionRow();
+              }
+              if (e.target.classList.contains('fewer-btn')) {
+                  removeConditionRow(e.target);
+              }
+          });
+      
+          function addConditionRow() {
+              const newRow = document.createElement('div');
+              newRow.className = 'condition-row';
+              newRow.innerHTML = `
+                  <select class="condition-prefix">
+                      <option value="AND">AND</option>
+                      <option value="OR">OR</option>
+                  </select>
+                  <select class="field-select">${document.querySelector('.field-select').innerHTML}</select>
+                  <select class="operator-select">${document.querySelector('.operator-select').innerHTML}</select>
+                  <input type="text" class="value-input" placeholder="Enter value">
+                  <button class="fewer-btn">↑ Fewer</button>
+              `;
+              document.getElementById('conditionsContainer').appendChild(newRow);
+          }
+      
+          function removeConditionRow(button) {
+              button.closest('.condition-row').remove();
+          }
+      
+          // Search functionality
+          document.querySelector('.search-btn').addEventListener('click', function() {
+              const searchTerm = document.getElementById('globalSearch').value.toLowerCase();
+              const results = [];
+              
+              document.querySelectorAll('.condition-row').forEach(row => {
+                  const field = row.querySelector('.field-select').value;
+                  const operator = row.querySelector('.operator-select').value;
+                  const value = row.querySelector('.value-input').value;
+                  
+                  if (field.toLowerCase().includes(searchTerm) || 
+                      operator.toLowerCase().includes(searchTerm) || 
+                      value.toLowerCase().includes(searchTerm)) {
+                      results.push({ field, operator, value });
+                  }
+              });
+      
+              updateResultsDisplay(results);
+          });
+      
+          function updateResultsDisplay(results) {
+              const tbody = document.getElementById('resultsBody');
+              tbody.innerHTML = '';
+              
+              results.forEach(result => {
+                  const row = document.createElement('tr');
+                  row.innerHTML = `
+                      <td>${result.field}</td>
+                      <td>${result.operator}</td>
+                      <td>${result.value}</td>
+                  `;
+                  tbody.appendChild(row);
+              });
+          }
+      
+          // Initial setup
+          document.querySelector('.condition-prefix').style.visibility = 'hidden';
+          </script>
   </body>
 </html>
