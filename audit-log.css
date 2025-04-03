@@ -401,7 +401,7 @@ body {
 
   /* Navigation bar styles */
  
-/* Navigation Styles */
+/* Navigation Styles 
 .main-nav {
 display: flex;
 gap: 0;
@@ -413,7 +413,7 @@ padding: 0 4px;
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 /* Navigation bar styles */
-.main-nav {
+/* .main-nav {
   display: flex;
   background-color: #f8faff;
   padding: 0 16px;
@@ -464,7 +464,7 @@ right: 0;
 height: 2px;
 background: #059669;
 border-radius: 2px;
-}
+} */
   /* Search Container Styles */
   .search-container {
       background-color: #fff;
@@ -473,10 +473,10 @@ border-radius: 2px;
       padding: 20px;
       margin-top: 20px;
   }
-.main-nav a.active {
+/* .main-nav a.active {
   color: rgb(35, 174, 115);
   border-bottom: 2px solid rgb(35, 174, 115);
-}
+} */
 
 /* Search Container Styles */
 .search-container {
