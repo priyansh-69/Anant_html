@@ -1423,3 +1423,50 @@ input[type="checkbox"]:checked::after {
     background: #f8fafc;
     border-color: #cbd5e1;
 }
+
+/* Subgroup Move Button Styles */
+.move-up-subfield,
+.move-down-subfield {
+    background: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    color: #4a5568;
+    cursor: pointer;
+    padding: 2px 8px;
+    margin: 0 2px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.move-up-subfield:hover,
+.move-down-subfield:hover {
+    background: #f8fafc;
+    color: #2d3748;
+    border-color: #cbd5e1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.move-up-subfield:disabled,
+.move-down-subfield:disabled {
+    color: #cbd5e0;
+    cursor: not-allowed;
+    border-color: #e5e7eb;
+    box-shadow: none;
+}
+
+.sub-field {
+    background: white;
+    padding: 8px 24px;
+    border-bottom: 1px solid #f3f4f6;
+    transition: background-color 0.2s ease;
+}
+
+.sub-field:hover {
+    background: #f8fafc;
+}
+
+.field-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

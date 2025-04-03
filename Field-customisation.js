@@ -101,10 +101,36 @@ saveButton.addEventListener('click', () => {
         </div>
         <div class="field-name">${fieldNameValue}</div>
         <div class="field-actions">
+            <button class="move-up-subfield" title="Move Up">↑</button>
+            <button class="move-down-subfield" title="Move Down">↓</button>
             <a href="#" class="edit-link">Edit</a>
             <a href="#" class="hide-link">Hide</a>
+            <a href="#" class="unhide-link" style="display: none;">UnHide</a>
         </div>
     `;
+
+    // Add CSS for the new buttons
+    const style = document.createElement('style');
+    style.textContent = `
+        .move-up-subfield, .move-down-subfield {
+            background: none;
+            border: none;
+            color: #4a5568;
+            cursor: pointer;
+            padding: 2px 8px;
+            margin: 0 2px;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .move-up-subfield:hover, .move-down-subfield:hover {
+            color: #2d3748;
+        }
+        .move-up-subfield:disabled, .move-down-subfield:disabled {
+            color: #cbd5e0;
+            cursor: not-allowed;
+        }
+    `;
+    document.head.appendChild(style);
 
     // Find the sub-fields container
     let subFieldsContainer = targetGroup.querySelector('.sub-fields');
@@ -120,27 +146,106 @@ saveButton.addEventListener('click', () => {
     // Add event listeners to the new field's controls
     const editLink = newFieldRow.querySelector('.edit-link');
     const hideLink = newFieldRow.querySelector('.hide-link');
+    const unhideLink = newFieldRow.querySelector('.unhide-link');
+    const moveUpBtn = newFieldRow.querySelector('.move-up-subfield');
+    const moveDownBtn = newFieldRow.querySelector('.move-down-subfield');
+
+    // Function to move field up
+    function moveFieldUp(field) {
+        const previousField = field.previousElementSibling;
+        if (previousField) {
+            field.parentNode.insertBefore(field, previousField);
+            updateMoveButtons(field.parentNode);
+        }
+    }
+
+    // Function to move field down
+    function moveFieldDown(field) {
+        const nextField = field.nextElementSibling;
+        if (nextField) {
+            field.parentNode.insertBefore(nextField, field);
+            updateMoveButtons(field.parentNode);
+        }
+    }
+
+    // Function to update move buttons' disabled state
+    function updateMoveButtons(container) {
+        const fields = container.querySelectorAll('.field-row.sub-field');
+        fields.forEach((field, index) => {
+            const upBtn = field.querySelector('.move-up-subfield');
+            const downBtn = field.querySelector('.move-down-subfield');
+            
+            if (upBtn) upBtn.disabled = index === 0;
+            if (downBtn) downBtn.disabled = index === fields.length - 1;
+        });
+    }
+
+    // Add click handlers for move buttons
+    moveUpBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const field = e.target.closest('.field-row.sub-field');
+        moveFieldUp(field);
+    });
+
+    moveDownBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const field = e.target.closest('.field-row.sub-field');
+        moveFieldDown(field);
+    });
+
+    // Initialize move buttons state
+    updateMoveButtons(subFieldsContainer);
 
     editLink.addEventListener('click', (e) => {
         e.preventDefault();
+        
+        // Get the current field's data
+        const fieldRow = e.target.closest('.field-row');
+        const fieldName = fieldRow.querySelector('.field-name').textContent;
+        const fieldGroup = fieldRow.closest('.field-group').querySelector('.field-row:not(.sub-field) .field-name').textContent;
+
+        // Show edit field modal
+        const editFieldModal = document.getElementById('editFieldModal');
+        
+        // Populate edit field modal with current values
+        document.querySelector('#editGroup').textContent = fieldGroup;
+        document.getElementById('editFieldName').value = fieldName;
+        
+        // Set default values for other fields if they don't exist
+        document.querySelector('#editFieldType').textContent = fieldTypeValue || 'Text';
+        document.querySelector('#editSearchMode').textContent = searchModeValue || 'ALL';
+        document.getElementById('editColumnWidth').value = columnWidth || '150';
+        
+        // Set checkboxes
+        document.getElementById('editIsMandatory').checked = isMandatory || false;
+        document.getElementById('editNeedMassEdit').checked = needMassEdit || true;
+        document.getElementById('editNeedFieldMapping').checked = needFieldMapping || true;
+
+        // Update dropdown selections
+        document.querySelectorAll('#editFieldModal .dropdown-item').forEach(item => {
+            const dropdownToggle = item.closest('.dropdown').querySelector('.dropdown-toggle');
+            if (dropdownToggle && item.textContent === dropdownToggle.textContent) {
+                item.classList.add('selected');
+            } else {
+                item.classList.remove('selected');
+            }
+        });
+
         editFieldModal.classList.add('show');
-        
-        // Populate edit field modal
-        document.querySelector('#editGroup').textContent = fieldGroupValue;
-        document.getElementById('editFieldName').value = fieldNameValue;
-        document.querySelector('#editFieldType').textContent = fieldTypeValue;
-        document.querySelector('#editSearchMode').textContent = searchModeValue;
-        document.getElementById('editColumnWidth').value = columnWidth;
-        
-        // Update checkboxes
-        document.getElementById('editIsMandatory').checked = isMandatory;
-        document.getElementById('editNeedMassEdit').checked = needMassEdit;
-        document.getElementById('editNeedFieldMapping').checked = needFieldMapping;
     });
 
     hideLink.addEventListener('click', (e) => {
         e.preventDefault();
-        newFieldRow.style.display = 'none';
+        newFieldRow.querySelector('.field-name').style.textDecoration = 'line-through';
+        hideLink.style.display = 'none';
+        unhideLink.style.display = 'inline';
+    });
+
+    unhideLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        newFieldRow.querySelector('.field-name').style.textDecoration = 'none';
+        hideLink.style.display = 'inline';
+        unhideLink.style.display = 'none';
     });
 
     // Close and reset the create field modal
@@ -154,6 +259,9 @@ saveButton.addEventListener('click', () => {
     // Reset dropdowns
     document.querySelector('#fieldType').textContent = "Text";
     document.querySelector('#searchMode').textContent = "ALL";
+
+    // Update move buttons after adding the new field
+    updateMoveButtons(subFieldsContainer);
 });
 
 // Hide modals when clicking outside
@@ -379,17 +487,166 @@ fieldEditLinks.forEach(link => {
 
 // Handle save changes in edit field modal
 editFieldModal.querySelector('.btn-save').addEventListener('click', () => {
-    editFieldModal.classList.remove('show');
-});
+    // Get the updated values
+    const newFieldName = document.getElementById('editFieldName').value;
+    const newGroup = document.querySelector('#editGroup').textContent;
+    const newFieldType = document.querySelector('#editFieldType').textContent;
+    const newSearchMode = document.querySelector('#editSearchMode').textContent;
+    const newColumnWidth = document.getElementById('editColumnWidth').value;
+    const newIsMandatory = document.getElementById('editIsMandatory').checked;
+    const newNeedMassEdit = document.getElementById('editNeedMassEdit').checked;
+    const newNeedFieldMapping = document.getElementById('editNeedFieldMapping').checked;
 
-// Handle cancel in edit field modal
-editFieldModal.querySelector('.btn-cancel').addEventListener('click', () => {
-    editFieldModal.classList.remove('show');
-});
+    // Find the field being edited
+    const activeField = document.querySelector('.field-row.sub-field.editing');
+    if (activeField) {
+        // Update the field name
+        activeField.querySelector('.field-name').textContent = newFieldName;
+        
+        // Update the checkbox ID if needed
+        const checkbox = activeField.querySelector('input[type="checkbox"]');
+        if (checkbox) {
+            checkbox.id = `${newFieldName.replace(/\s+/g, '')}Check`;
+        }
 
-// Close edit field modal when clicking outside
-window.addEventListener('click', (e) => {
-    if (e.target === editFieldModal) {
-        editFieldModal.classList.remove('show');
+        // Remove editing class
+        activeField.classList.remove('editing');
+
+        // If group changed, move the field to the new group
+        const currentGroup = activeField.closest('.field-group');
+        const currentGroupName = currentGroup.querySelector('.field-row:not(.sub-field) .field-name').textContent;
+        
+        if (newGroup !== currentGroupName) {
+            const targetGroup = Array.from(document.querySelectorAll('.field-group')).find(group => 
+                group.querySelector('.field-row:not(.sub-field) .field-name').textContent === newGroup
+            );
+            
+            if (targetGroup) {
+                let subFieldsContainer = targetGroup.querySelector('.sub-fields');
+                if (!subFieldsContainer) {
+                    subFieldsContainer = document.createElement('div');
+                    subFieldsContainer.classList.add('sub-fields');
+                    targetGroup.appendChild(subFieldsContainer);
+                }
+                subFieldsContainer.appendChild(activeField);
+            }
+        }
     }
+
+    // Close the modal
+    document.getElementById('editFieldModal').classList.remove('show');
+});
+
+// Add click handler for edit links
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('edit-link')) {
+        e.preventDefault();
+        
+        // Remove editing class from any previously edited field
+        document.querySelectorAll('.field-row.sub-field.editing').forEach(field => {
+            field.classList.remove('editing');
+        });
+        
+        // Add editing class to current field
+        const fieldRow = e.target.closest('.field-row.sub-field');
+        if (fieldRow) {
+            fieldRow.classList.add('editing');
+        }
+    }
+});
+
+// Add global handler for move buttons
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('move-up-subfield') || e.target.classList.contains('move-down-subfield')) {
+        const field = e.target.closest('.field-row.sub-field');
+        const container = field.parentNode;
+        
+        if (e.target.classList.contains('move-up-subfield')) {
+            moveFieldUp(field);
+        } else {
+            moveFieldDown(field);
+        }
+        
+        updateMoveButtons(container);
+    }
+});
+
+// Function to initialize move buttons for existing fields
+function initializeMoveButtons() {
+    document.querySelectorAll('.sub-fields').forEach(container => {
+        const fields = container.querySelectorAll('.field-row.sub-field');
+        fields.forEach((field, index) => {
+            // Add move buttons if they don't exist
+            if (!field.querySelector('.move-up-subfield')) {
+                const actions = field.querySelector('.field-actions');
+                const editLink = actions.querySelector('.edit-link');
+                
+                const moveUpBtn = document.createElement('button');
+                moveUpBtn.className = 'move-up-subfield';
+                moveUpBtn.title = 'Move Up';
+                moveUpBtn.textContent = '↑';
+                
+                const moveDownBtn = document.createElement('button');
+                moveDownBtn.className = 'move-down-subfield';
+                moveDownBtn.title = 'Move Down';
+                moveDownBtn.textContent = '↓';
+                
+                actions.insertBefore(moveDownBtn, editLink.nextSibling);
+                actions.insertBefore(moveUpBtn, editLink.nextSibling);
+            }
+        });
+        updateMoveButtons(container);
+    });
+}
+
+// Initialize move buttons when the page loads
+document.addEventListener('DOMContentLoaded', initializeMoveButtons);
+
+// Add these functions at the beginning of the file
+function moveSubfieldUp(field) {
+    const previousField = field.previousElementSibling;
+    if (previousField && previousField.classList.contains('sub-field')) {
+        field.parentNode.insertBefore(field, previousField);
+        updateSubfieldMoveButtons(field.parentNode);
+    }
+}
+
+function moveSubfieldDown(field) {
+    const nextField = field.nextElementSibling;
+    if (nextField && nextField.classList.contains('sub-field')) {
+        field.parentNode.insertBefore(nextField, field);
+        updateSubfieldMoveButtons(field.parentNode);
+    }
+}
+
+function updateSubfieldMoveButtons(container) {
+    const subfields = container.querySelectorAll('.sub-field');
+    subfields.forEach((field, index) => {
+        const upBtn = field.querySelector('.move-up-subfield');
+        const downBtn = field.querySelector('.move-down-subfield');
+        
+        if (upBtn) upBtn.disabled = index === 0;
+        if (downBtn) downBtn.disabled = index === subfields.length - 1;
+    });
+}
+
+// Add this to your document ready or initialization code
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize move buttons state for all subfield containers
+    document.querySelectorAll('.sub-fields').forEach(container => {
+        updateSubfieldMoveButtons(container);
+    });
+
+    // Add click handlers for move buttons
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('move-up-subfield')) {
+            e.preventDefault();
+            const field = e.target.closest('.sub-field');
+            moveSubfieldUp(field);
+        } else if (e.target.classList.contains('move-down-subfield')) {
+            e.preventDefault();
+            const field = e.target.closest('.sub-field');
+            moveSubfieldDown(field);
+        }
+    });
 });
