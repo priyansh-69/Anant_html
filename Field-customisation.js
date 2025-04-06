@@ -650,3 +650,114 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Modified Save Changes handler for creating a new group
+document.querySelector('#createGroupModal .btn-ok').addEventListener('click', () => {
+    // Get the group name from the modal
+    const groupName = document.getElementById('newGroupName').value.trim();
+    const columnLayout = document.querySelector('#createGroupModal .dropdown-toggle').textContent.trim();
+    
+    if (!groupName) {
+        alert("Please enter a group name.");
+        return;
+    }
+
+    // Create new group HTML
+    const newGroup = document.createElement('div');
+    newGroup.classList.add('field-group');
+    newGroup.innerHTML = `
+        <div class="field-row">
+            <div class="field-checkbox">
+                <input type="checkbox" id="${groupName.replace(/\s+/g, '')}Check" />
+            </div>
+            <div class="field-name">${groupName}</div>
+            <div class="field-controls">
+                <button class="edit"></button>
+                <button class="move-up"></button>
+                <button class="move-down"></button>
+                <label class="show-default">
+                    <input type="checkbox" checked />
+                    <span>Show Default</span>
+                </label>
+            </div>
+        </div>
+        <div class="sub-fields"></div>
+    `;
+
+    // Add the new group to the page
+    document.querySelector('.leads-layout').appendChild(newGroup);
+
+    // Add the new group to all group dropdowns
+    const dropdownMenus = document.querySelectorAll('.group-dropdown .dropdown-menu');
+    dropdownMenus.forEach(menu => {
+        const newItem = document.createElement('div');
+        newItem.classList.add('dropdown-item');
+        newItem.textContent = groupName;
+        menu.appendChild(newItem);
+
+        // Add click handler for the new dropdown item
+        newItem.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const dropdown = menu.closest('.dropdown');
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            
+            // Update selected state
+            menu.querySelectorAll('.dropdown-item').forEach(item => item.classList.remove('selected'));
+            newItem.classList.add('selected');
+            
+            // Update toggle text
+            toggle.textContent = groupName;
+            
+            // Close dropdown
+            dropdown.classList.remove('open');
+        });
+    });
+
+    // Add event listeners to the new group's buttons
+    const editButton = newGroup.querySelector('.edit');
+    const moveUpButton = newGroup.querySelector('.move-up');
+    const moveDownButton = newGroup.querySelector('.move-down');
+    const checkbox = newGroup.querySelector('input[type="checkbox"]');
+
+    editButton.addEventListener('click', () => {
+        editModal.classList.add('show');
+        document.getElementById('groupName').value = groupName;
+    });
+
+    moveUpButton.addEventListener('click', () => {
+        if (!checkbox.checked) {
+            showAlert();
+            return;
+        }
+        const previousGroup = newGroup.previousElementSibling;
+        if (previousGroup && previousGroup.classList.contains('field-group')) {
+            newGroup.parentNode.insertBefore(newGroup, previousGroup);
+        }
+    });
+
+    moveDownButton.addEventListener('click', () => {
+        if (!checkbox.checked) {
+            showAlert();
+            return;
+        }
+        const nextGroup = newGroup.nextElementSibling;
+        if (nextGroup && nextGroup.classList.contains('field-group')) {
+            newGroup.parentNode.insertBefore(nextGroup, newGroup);
+        }
+    });
+
+    // Close the modal and reset form
+    createGroupModal.classList.remove('show');
+    document.getElementById('newGroupName').value = '';
+    document.querySelector('#createGroupModal .dropdown-toggle').textContent = 'Two Column';
+});
+
+// Add click handler for the Add Group button (folder-plus)
+document.querySelector('.folder-plus').addEventListener('click', () => {
+    // Reset the create group modal form
+    document.getElementById('newGroupName').value = '';
+    document.querySelector('#createGroupModal .dropdown-toggle').textContent = 'Two Column';
+    createGroupModal.classList.add('show');
+});
